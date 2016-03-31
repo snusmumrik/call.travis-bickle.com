@@ -1,0 +1,20 @@
+.container
+  .row
+    .col-lg-10.col-lg-offset-1.text-center
+      %h2= t("activerecord.models.taxi") + t("views.index")
+
+%section
+  .container
+    = paginate @taxis
+    - @taxis.each do |taxi|
+      .row
+        .col-lg-12.text-center
+          %h2= taxi.name
+          = link_to t("links.edit"), edit_taxi_path(taxi)
+          = link_to t("links.destroy"), taxi, method: :delete, data: { confirm: t("messages.are_you_sure") }
+      %hr.small
+    / /.row
+    = paginate @taxis
+  / /.container
+
+.text-center= link_to t("activerecord.models.taxi") + t("links.new"), new_taxi_path, class: "btn btn-default"

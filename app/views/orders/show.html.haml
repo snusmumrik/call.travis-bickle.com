@@ -1,0 +1,27 @@
+%p#notice= notice
+
+%p
+  %b Address:
+  = @order.address
+%p
+  %b Latitude:
+  = @order.latitude
+%p
+  %b Longitude:
+  = @order.longitude
+%p
+  %b Keyword:
+  = @order.keyword
+%p
+  %b Assigned at:
+  = @order.assigned_at
+%p
+  %b Picked up at:
+  = @order.picked_up_at
+%p
+  %b Arrived at:
+  = @order.arrived_at
+
+= link_to 'Edit', edit_order_path(@order)
+\|
+= link_to 'Back', orders_path

@@ -1,0 +1,10 @@
+%p
+  %b Name:
+  = @taxi.name
+%p
+  %b Type:
+  = @taxi.type
+
+= link_to 'Edit', edit_taxi_path(@taxi)
+\|
+= link_to 'Back', taxis_path

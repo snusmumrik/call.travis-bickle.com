@@ -1,0 +1,6 @@
+.container
+  .row
+    .col-lg-10.col-lg-offset-1
+      %h2.text-center= t("activerecord.models.taxi") + t("views.new")
+      = render 'form'
+      = link_to t("links.back"), taxis_path, class: "btn btn-default"

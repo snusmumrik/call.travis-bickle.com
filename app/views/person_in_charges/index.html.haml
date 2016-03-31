@@ -1,0 +1,20 @@
+.container
+  .row
+    .col-lg-10.col-lg-offset-1.text-center
+      %h2= t("activerecord.models.person_in_charge") + t("views.index")
+
+%section
+  .container
+    = paginate @person_in_charges
+    - @person_in_charges.each do |person_in_charge|
+      .row
+        .col-lg-12.text-center
+          %h2= person_in_charge.name
+          = link_to t("links.edit"), edit_person_in_charge_path(person_in_charge)
+          = link_to t("links.destroy"), person_in_charge, method: :delete, data: { confirm: t("messages.are_you_sure") }
+      %hr.small
+    / /.row
+    = paginate @person_in_charges
+  / /.container
+
+.text-center= link_to t("activerecord.models.person_in_charge") + t("links.new"), new_person_in_charge_path, class: "btn btn-default"
