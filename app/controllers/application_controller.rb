@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   skip_before_action :verify_authenticity_token, if: -> {request.format.json?}
-  before_action :authenticate_user_from_token!, if: -> {params[:email].present? && params[:token].present?}
+  before_action :authenticate_user_from_token!, if: -> {params[:email].present?}
 
   rescue_from CanCan::AccessDenied do |exception|
     respond_to do |format|

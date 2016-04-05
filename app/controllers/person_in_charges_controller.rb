@@ -1,4 +1,5 @@
 class PersonInChargesController < ApplicationController
+  load_and_authorize_resource
   before_action :authenticate_user!
   before_action :set_person_in_charge, only: [:show, :edit, :update, :destroy]
 
@@ -25,7 +26,7 @@ class PersonInChargesController < ApplicationController
   # POST /person_in_charges
   # POST /person_in_charges.json
   def create
-    @person_in_charge = PersonInCharge.new(person_in_charge_params)
+    @person_in_charge = PersonInCharge.new(person_in_charge_params.merge(user: current_user))
 
     respond_to do |format|
       if @person_in_charge.save

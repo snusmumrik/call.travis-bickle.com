@@ -7,3 +7,4 @@ $ ->
     $('.datetimepicker').datetimepicker
       locale: "ja"
       format: "YYYY/MM/DD HH:mm"
+      sideBySide: true

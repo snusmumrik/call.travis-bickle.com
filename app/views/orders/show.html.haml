@@ -1,27 +1,37 @@
-%p#notice= notice
+.container
+  .row
+    .col-lg-10.col-lg-offset-1.text-center
+      %h2= t("activerecord.models.order") + t("views.show")
 
-%p
-  %b Address:
-  = @order.address
-%p
-  %b Latitude:
-  = @order.latitude
-%p
-  %b Longitude:
-  = @order.longitude
-%p
-  %b Keyword:
-  = @order.keyword
-%p
-  %b Assigned at:
-  = @order.assigned_at
-%p
-  %b Picked up at:
-  = @order.picked_up_at
-%p
-  %b Arrived at:
-  = @order.arrived_at
+%section
+  .container
+    .row
+      .col-lg-10.col-lg-offset-4
+        %p
+          %b= t("activerecord.attributes.order.address")
+          = @order.address
+        %p
+          %b= t("activerecord.attributes.order.latitude")
+          = @order.latitude
+        %p
+          %b= t("activerecord.attributes.order.longitude")
+          = @order.longitude
+        %p
+          %b= t("activerecord.attributes.order.keyword")
+          = @order.keyword
+        %p
+          %b= t("activerecord.attributes.order.taxi")
+          = @order.taxis.first.try(:name)
+        %p
+          %b= t("activerecord.attributes.order.assigned_at")
+          = @order.assigned_at
+        %p
+          %b= t("activerecord.attributes.order.picked_up_at")
+          = @order.picked_up_at
+        %p
+          %b= t("activerecord.attributes.order.arrived_at")
+          = @order.arrived_at
 
-= link_to 'Edit', edit_order_path(@order)
-\|
-= link_to 'Back', orders_path
+        = link_to t("links.edit"), edit_order_path(@order)
+        \|
+        = link_to t("links.back"), orders_path

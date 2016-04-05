@@ -11,11 +11,11 @@
         .col-lg-12.text-center
           %h2= order.address
           %span.lead
-            = "#{order.latitude}, #{order.longitude}"
             = order.keyword
-            = order.assigned_at.strftime("%Y年%m月%d日 %H時%M分%s秒")
-            = order.picked_up_at.strftime("%Y年%m月%d日 %H時%M分%s秒")
-            = order.arrived_at.strftime("%Y年%m月%d日 %H時%M分%s秒")
+            = order.taxis.first.try(:name)
+            = order.assigned_at.strftime("%Y年%m月%d日 %H時%M分%S秒") if order.assigned_at
+            = order.picked_up_at.strftime("%Y年%m月%d日 %H時%M分%S秒") if order.picked_up_at
+            = order.arrived_at.strftime("%Y年%m月%d日 %H時%M分%S秒") if order.arrived_at
           = link_to t("links.edit"), edit_order_path(order)
           = link_to t("links.destroy"), order, method: :delete, data: { confirm: t("messages.are_you_sure") }
       %hr.small
@@ -23,4 +23,4 @@
     = paginate @orders
   / /.container
 
-.text-center= link_to t("activerecord.models.order") + t("links.new"), new_order_path, class: "btn btn-default"
+-# .text-center= link_to t("activerecord.models.order") + t("links.new"), new_order_path, class: "btn btn-default"

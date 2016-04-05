@@ -19,6 +19,13 @@
     = f.label :keyword
     = f.text_field :keyword, class: "form-control"
   .field
+    = f.label :taxi
+    = f.fields_for :taxis do |taxi_form|
+      - if @order.taxis.first
+        = taxi_form.select :taxi_id, options_for_select(@taxis, @order.taxis.first.id), {include_blank: true}, class: "form-control"
+      - else
+        = taxi_form.select :taxi_id, options_for_select(@taxis), {include_blank: true}, class: "form-control"
+  .field
     = f.label :assigned_at
     = f.text_field :assigned_at, class: "form-control datetimepicker"
   .field

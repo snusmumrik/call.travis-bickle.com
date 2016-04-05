@@ -1,4 +1,5 @@
 class TaxisController < ApplicationController
+  load_and_authorize_resource
   before_action :authenticate_user!
   before_action :set_taxi, only: [:show, :edit, :update, :destroy]
 
@@ -25,7 +26,7 @@ class TaxisController < ApplicationController
   # POST /taxis
   # POST /taxis.json
   def create
-    @taxi = Taxi.new(taxi_params)
+    @taxi = Taxi.new(taxi_params.merge(user: current_user))
 
     respond_to do |format|
       if @taxi.save
@@ -70,6 +71,6 @@ class TaxisController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def taxi_params
-      params.require(:taxi).permit(:user_id, :name, :type)
+      params.require(:taxi).permit(:user_id, :name, :type_name)
     end
 end

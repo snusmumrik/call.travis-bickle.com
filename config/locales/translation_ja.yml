@@ -12,12 +12,13 @@ ja:
       order:
         address: 住所
         arrived_at: 到着
-        assigned_at: 割当
+        assigned_at: 到着予定
         deleted_at: deleted_at  #g
         keyword: 合言葉
         latitude: 緯度
         longitude: 経度
         picked_up_at: 乗車
+        taxi: 車両
 
       orders_person_in_charge:
         deleted_at: deleted_at  #g
@@ -36,7 +37,7 @@ ja:
       taxi:
         deleted_at: deleted_at  #g
         name: 車番
-        type: 型
+        type_name: 型
         user: :activerecord.models.user  #g
 
       user:

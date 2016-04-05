@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160330020443) do
+ActiveRecord::Schema.define(version: 20160404043500) do
 
   create_table "orders", force: :cascade do |t|
     t.integer  "user_id",      limit: 4
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20160330020443) do
     t.float    "latitude",     limit: 24
     t.float    "longitude",    limit: 24
     t.string   "keyword",      limit: 255
+    t.string   "device_token", limit: 255
     t.datetime "assigned_at"
     t.datetime "picked_up_at"
     t.datetime "arrived_at"
@@ -63,7 +64,7 @@ ActiveRecord::Schema.define(version: 20160330020443) do
   create_table "taxis", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
     t.string   "name",       limit: 255
-    t.string   "type",       limit: 255
+    t.string   "type_name",  limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.datetime "deleted_at"
@@ -83,11 +84,13 @@ ActiveRecord::Schema.define(version: 20160330020443) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip",     limit: 255
     t.string   "last_sign_in_ip",        limit: 255
+    t.string   "authentication_token",   limit: 255
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
     t.datetime "deleted_at"
   end
 
+  add_index "users", ["authentication_token"], name: "index_users_on_authentication_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 

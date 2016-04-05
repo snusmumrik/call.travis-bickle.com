@@ -1,7 +1,11 @@
-%h1 Editing order
+.container
+  .row
+    .col-lg-10.col-lg-offset-1
+      .text-center
+        %h2= t("activerecord.models.order") + t("views.edit")
 
-= render 'form'
+      = render 'form'
 
-= link_to 'Show', @order
-\|
-= link_to 'Back', orders_path
+      = link_to 'Show', @order
+      \|
+      = link_to 'Back', orders_path

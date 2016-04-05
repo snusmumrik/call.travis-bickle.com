@@ -2,10 +2,8 @@ Rails.application.routes.draw do
   resources :orders
   resources :taxis
   resources :person_in_charges
-  devise_for :users, controllers: {
-    registrations: 'users/registrations',
-    sessions: 'users/sessions'
-  }
+  resource :authentication_token, only: [:update, :destroy]
+  devise_for :users, controllers: { sessions: "sessions" }
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
