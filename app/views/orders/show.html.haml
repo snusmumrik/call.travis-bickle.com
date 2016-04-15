@@ -1,37 +1,30 @@
 .container
   .row
     .col-lg-10.col-lg-offset-1.text-center
-      %h2= t("activerecord.models.order") + t("views.show")
+      %h2.vertical-margin-50 配車のご依頼を承りました。
+      .vertical-margin-50
+        %b 情報が更新されるまで、しばらくこのままでお待ちください。
 
 %section
   .container
     .row
-      .col-lg-10.col-lg-offset-4
-        %p
-          %b= t("activerecord.attributes.order.address")
-          = @order.address
-        %p
-          %b= t("activerecord.attributes.order.latitude")
-          = @order.latitude
-        %p
-          %b= t("activerecord.attributes.order.longitude")
-          = @order.longitude
-        %p
-          %b= t("activerecord.attributes.order.keyword")
-          = @order.keyword
-        %p
-          %b= t("activerecord.attributes.order.taxi")
-          = @order.taxis.first.try(:name)
-        %p
-          %b= t("activerecord.attributes.order.assigned_at")
-          = @order.assigned_at
-        %p
-          %b= t("activerecord.attributes.order.picked_up_at")
-          = @order.picked_up_at
-        %p
-          %b= t("activerecord.attributes.order.arrived_at")
-          = @order.arrived_at
+      .col-lg-6.col-lg-offset-3
+        %table.table
+          %tr
+            %th= t("activerecord.attributes.order.address")
+            %td= @order.address
+          %tr
+            %th= t("activerecord.attributes.order.keyword")
+            %td= @order.keyword
+          %tr
+            %th= t("activerecord.attributes.order.taxi")
+            %td= @order.taxis.first.try(:name)
+          %tr
+            %th= t("activerecord.attributes.order.assigned_at")
+            %td= @order.assigned_at
 
-        = link_to t("links.edit"), edit_order_path(@order)
-        \|
-        = link_to t("links.back"), orders_path
+.container
+  .row
+    #loading.text-center= image_tag "/loading.gif"
+    .col-lg-10.col-lg-offset-1.text-center
+      .vertical-margin-50= link_to t("links.order.back"), new_order_path, class: "btn btn-default btn-lg disabled"

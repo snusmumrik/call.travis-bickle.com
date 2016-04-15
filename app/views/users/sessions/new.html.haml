@@ -2,16 +2,17 @@
   %h2= t("views.user.sign_in")
   .field
     = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true, class: "form-control"
+    = f.email_field :email, autofocus: true, class: "form-control", value: @email
   .field
     = f.label :password
-    %br/
-    = f.password_field :password, autocomplete: "off", class: "form-control"
+    = f.password_field :password, autocomplete: "off", class: "form-control", value: @password
   - if devise_mapping.rememberable?
     .field
-      = f.check_box :remember_me
+      - if @email && @password
+        = f.check_box :remember_me, checked: true
+      - else
+        = f.check_box :remember_me
       = f.label :remember_me
   .actions
-    = f.submit t("views.user.sign_in"), class: "btn btn-default"
+    = f.submit t("links.user.sign_in"), class: "btn btn-default"
   = render "users/shared/links"

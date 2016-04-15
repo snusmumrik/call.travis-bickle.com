@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 class OrdersController < ApplicationController
   load_and_authorize_resource
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:new, :show]
   before_action :set_order, only: [:show, :edit, :update, :destroy]
   before_action :set_taxi, only: [:new, :create, :edit, :update]
 
@@ -32,7 +32,7 @@ class OrdersController < ApplicationController
 
     respond_to do |format|
       if @order.save
-        format.html { redirect_to @order, notice: t("activerecord.models.order") + t("messages.created") }
+        format.html { redirect_to @order, notice: t("messages.order.created") }
         format.json { render :show, status: :created, location: @order }
       else
         format.html { render :new }

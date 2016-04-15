@@ -19,6 +19,10 @@ ja:
         longitude: 経度
         picked_up_at: 乗車
         taxi: 車両
+        device_token: "デバイストークン"  #g
+        person_in_charges: "料金の人物"  #g
+        taxis: "タクシー"  #g
+        user: :activerecord.models.user  #g
 
       orders_person_in_charge:
         deleted_at: deleted_at  #g
@@ -28,20 +32,23 @@ ja:
       orders_taxi:
         deleted_at: deleted_at  #g
         taxi: :activerecord.models.taxi  #g
+        order: :activerecord.models.order  #g
 
       person_in_charge:
         deleted_at: deleted_at  #g
         name: 名前
         user: :activerecord.models.user  #g
+        orders: "受注"  #g
 
       taxi:
         deleted_at: deleted_at  #g
         name: 車番
         type_name: 型
         user: :activerecord.models.user  #g
+        orders: "受注"  #g
 
       user:
-        company: 会社名
+        name: 会社名
         current_sign_in_at: current_sign_in_at  #g
         current_sign_in_ip: current_sign_in_ip  #g
         deleted_at: deleted_at  #g
@@ -55,6 +62,22 @@ ja:
         remember_me: ログイン情報を記憶
         reset_password_sent_at: reset_password_sent_at  #g
         reset_password_token: reset_password_token  #g
+        authentication_token: "認証トークン"  #g
+        orders: "受注"  #g
+        person_in_charges: "料金の人物"  #g
+        taxis: "タクシー"  #g
+
+      habtm_orders:
+        left_side: :activerecord.models.left_side  #g
+        order: :activerecord.models.order  #g
+
+      habtm_person_in_charges:
+        left_side: :activerecord.models.left_side  #g
+        person_in_charge: :activerecord.models.person_in_charge  #g
+
+      habtm_taxis:
+        left_side: :activerecord.models.left_side  #g
+        taxi: :activerecord.models.taxi  #g
 
   links:
     index: 一覧
@@ -66,10 +89,10 @@ ja:
 
     about: このサイトについて
     contact: お問い合わせ
-    faq: よくある質問
 
-    reservation:
-      suspend: 売止
+    order:
+      back: 配車依頼画面へ戻る
+      new: タクシーを呼ぶ
 
     user:
       sign_in: ログイン
@@ -87,6 +110,9 @@ ja:
     destroy: を削除しました。
     are_you_sure: 削除してよろしいですか？
     unauthorided: 権限のないリクエストです
+
+    order:
+      created: 現在配車依頼を行っております。車両の手配が完了するまで、しばらくお待ちください。
 
     user:
       sign_out: ログアウトしてよろしいですか？

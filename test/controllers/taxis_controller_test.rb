@@ -18,7 +18,7 @@ class TaxisControllerTest < ActionController::TestCase
 
   test "should create taxi" do
     assert_difference('Taxi.count') do
-      post :create, taxi: { company_id: @taxi.company_id, name: @taxi.name, type: @taxi.type }
+      post :create, taxi: { user_id: @taxi.user_id, name: @taxi.name, type: @taxi.type }
     end
 
     assert_redirected_to taxi_path(assigns(:taxi))
@@ -35,7 +35,7 @@ class TaxisControllerTest < ActionController::TestCase
   end
 
   test "should update taxi" do
-    patch :update, id: @taxi, taxi: { company_id: @taxi.company_id, name: @taxi.name, type: @taxi.type }
+    patch :update, id: @taxi, taxi: { user_id: @taxi.user_id, name: @taxi.name, type: @taxi.type }
     assert_redirected_to taxi_path(assigns(:taxi))
   end
 

@@ -29,8 +29,12 @@ class Ability
     # See the wiki for details:
     # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
 
-    can :manage, Taxi, user: user
-    can :manage, PersonInCharge, user: user
-    can :manage, Order, user: user
+    user ||= User.new # guest user (not logged in)
+    if user.admin?
+      can :manage, :all, user: user
+    elsif user
+      can :create, Order
+      can :read, Order, user: user
+    end
   end
 end

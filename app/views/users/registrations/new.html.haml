@@ -2,9 +2,9 @@
   %h2= t("views.user.sign_up")
   = devise_error_messages!
   .field
-    = f.label :company
+    = f.label :name
     %br/
-    = f.email_field :company, autofocus: true, class: "form-control"
+    = f.email_field :name, autofocus: true, class: "form-control"
   .field
     = f.label :email
     %br/

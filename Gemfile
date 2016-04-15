@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
 # Use mysql as the database for Active Record
@@ -53,6 +52,7 @@ gem 'devise'
 gem 'devise-i18n'
 gem 'erb2haml'
 gem 'friendly_id'
+gem 'geocoder'
 gem 'haml-rails'
 gem 'houston'
 gem 'i18n_generators'
