@@ -31,7 +31,9 @@ class Ability
 
     user ||= User.new # guest user (not logged in)
     if user.admin?
-      can :manage, :all, user: user
+      can :manage, Order, parent_id: user.id
+      can :manage, PersonInCharge, user: user
+      can :manage, Taxi, user: user
     elsif user
       can :create, Order
       can :read, Order, user: user

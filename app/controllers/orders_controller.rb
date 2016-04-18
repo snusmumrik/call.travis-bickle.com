@@ -8,7 +8,7 @@ class OrdersController < ApplicationController
   # GET /orders
   # GET /orders.json
   def index
-    @orders = Order.order("created_at DESC").page params[:page]
+    @orders = Order.where(["parent_id = ?", current_user.id]).order("created_at DESC").page params[:page]
   end
 
   # GET /orders/1
@@ -28,7 +28,7 @@ class OrdersController < ApplicationController
   # POST /orders
   # POST /orders.json
   def create
-    @order = Order.new(order_params.merge(user: current_user, keyword: sprintf("%04d", Random.rand(1..9999))))
+    @order = Order.new(order_params.merge(parent_id: current_user.parent_id, user: current_user, keyword: sprintf("%04d", Random.rand(1..9999))))
 
     respond_to do |format|
       if @order.save
@@ -45,8 +45,7 @@ class OrdersController < ApplicationController
   # PATCH/PUT /orders/1.json
   def update
     if params[:order][:taxis][:taxi_id].blank?
-      orders_taxi = OrdersTaxi.where(["order_id = ?", @order.id]).first
-      orders_taxi.destroy
+      orders_taxi.destroy if orders_taxi = OrdersTaxi.where(["order_id = ?", @order.id]).first
     else
       unless OrdersTaxi.where(["order_id = ? AND taxi_id = ?", @order.id, params[:order][:taxis][:taxi_id]]).first
         unless @order.taxis.blank?
@@ -118,6 +117,6 @@ class OrdersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def order_params
-    params.require(:order).permit(:address, :latitude, :longitude, :keyword, :device_token, :assigned_at, :picked_up_at, :arrived_at)
+    params.require(:order).permit(:parent_id, :address, :latitude, :longitude, :keyword, :device_token, :assigned_at, :picked_up_at, :arrived_at)
   end
 end

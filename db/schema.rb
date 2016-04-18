@@ -11,9 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160415050735) do
+ActiveRecord::Schema.define(version: 20160417092322) do
 
   create_table "orders", force: :cascade do |t|
+    t.integer  "parent_id",    limit: 4
     t.integer  "user_id",      limit: 4
     t.string   "address",      limit: 255
     t.float    "latitude",     limit: 24
@@ -73,6 +74,7 @@ ActiveRecord::Schema.define(version: 20160415050735) do
   add_index "taxis", ["user_id"], name: "index_taxis_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
+    t.integer  "parent_id",              limit: 4
     t.string   "name",                   limit: 255, default: "", null: false
     t.string   "email",                  limit: 255, default: "", null: false
     t.string   "encrypted_password",     limit: 255, default: "", null: false

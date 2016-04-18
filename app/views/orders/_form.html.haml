@@ -25,6 +25,7 @@
         = taxi_form.select :taxi_id, options_for_select(@taxis, @order.taxis.first.id), {include_blank: true}, class: "form-control"
       - else
         = taxi_form.select :taxi_id, options_for_select(@taxis), {include_blank: true}, class: "form-control"
+    = f.hidden_field :device_token
   .field
     = f.label :assigned_at
     = f.text_field :assigned_at, class: "form-control datetimepicker"
@@ -35,4 +36,4 @@
     = f.label :arrived_at
     = f.text_field :arrived_at, class: "form-control datetimepicker"
   .actions
-    = f.submit class: "btn btn-default"
+    = f.submit id: "order_submit",  class: "btn btn-default"

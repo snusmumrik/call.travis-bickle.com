@@ -8,5 +8,3 @@ $ ->
       locale: "ja"
       format: "YYYY/MM/DD HH:mm"
       sideBySide: true
-
-  # $('#loading').hide('slow')

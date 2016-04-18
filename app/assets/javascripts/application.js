@@ -17,3 +17,4 @@
 //= require moment
 //= require moment/ja
 //= require bootstrap-datetimepicker
+//= require websocket_rails/main
