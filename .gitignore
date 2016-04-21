@@ -15,7 +15,7 @@
 */.DS_Store
 
 config/database.yml
-config/environments/production.rb
+# config/environments/production.rb
 # config/initializers/devise.rb
 
 public/assets
