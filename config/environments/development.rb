@@ -40,4 +40,6 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   config.middleware.delete Rack::Lock
+
+  WEBSOCKET_URL = "localhost:3000/websocket"
 end

@@ -8,3 +8,8 @@ $ ->
       locale: "ja"
       format: "YYYY/MM/DD HH:mm"
       sideBySide: true
+
+  if $('#taxi').text() == '' || $('#assigned_at').text() == ''
+    $('#loading').removeClass('hidden')
+  else
+    $('#order_back a').removeClass('disabled')

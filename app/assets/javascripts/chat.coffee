@@ -9,13 +9,13 @@ class @ChatClass
     @channel = @dispatcher.subscribe(@device_token)
     console.log(url)
     @bindEvents()
- 
+
   bindEvents: () =>
     # $('#send').on 'click', @sendMessage
     $('#order_submit').on 'click', @updateMessage
     # サーバーからnew_messageを受け取ったreceiveMessageを実行
     @channel.bind 'update_message', @receiveMessage
- 
+
   # sendMessage: (event) =>
   #   alert 'send'
   #   # サーバ側にsend_messageのイベントを送信
@@ -26,25 +26,28 @@ class @ChatClass
   #   @channel.trigger 'new_message', { device_token: @device_token }
 
   updateMessage: (event) =>
-    alert 'update'
+    # alert 'update'
     if $('#order_taxis_taxi_id').val() != '' && $('#order_assigned_at').val() != ''
       device_token = $('#order_device_token').val()
-      taxi = $('#order_taxis_taxi_id').val()
+      taxi = $('#order_taxis_taxi_id option:selected').text()
       assigned_at = $('#order_assigned_at').val()
       @dispatcher.trigger 'update_message', { device_token: device_token, taxi: taxi, assigned_at: assigned_at }
- 
+
   receiveMessage: (message) =>
-    alert 'receive'
+    # alert 'receive'
     console.log message
     $('#taxi').html(message['taxi'])
     $('#assigned_at').html(message['assigned_at'])
+    $('div.alert').hide('slow')
     $('#title').html('配車が確定しました。')
     $('#sub-title').html('車両到着時に合言葉の確認をお願いいたします。')
     $('#loading').hide('slow')
- 
+    $('#order_back a').removeClass('disabled')
+
 $ ->
   if window.location.href.match(/orders\/[0-9]+/) || window.location.href.match(/orders\/[0-9]+\/edit/)
-    window.chatClass = new ChatClass('localhost:3000/websocket', true)
+    websocket_url = $('#websocket_url').val()
+    window.chatClass = new ChatClass(websocket_url, true)
 
 # generate_token = (len)->
 #   return "" if len <= 0

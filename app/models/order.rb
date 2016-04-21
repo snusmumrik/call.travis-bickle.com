@@ -9,8 +9,11 @@ class Order < ActiveRecord::Base
 
   validates :latitude, :longitude, presence: true
 
+  geocoded_by :address
+  after_validation :geocode, if: lambda {|obj| obj.address_changed?}
+
   reverse_geocoded_by :latitude, :longitude
-  after_validation :reverse_geocode
+  after_validation :reverse_geocode, if: lambda {|obj| obj.latitude_changed? && obj.longitude_changed?}
 
   before_save do
     self.address.sub!(/日本, 〒[0-9-]+ /, "")

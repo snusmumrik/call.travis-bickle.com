@@ -6,7 +6,7 @@
         .vertical-margin-50
           %b#sub-title 情報が更新されるまで、しばらくこのままでお待ちください。
       - else
-        %h2.vertical-margin-50 配車依頼更新
+        %h2.vertical-margin-50 配車依頼情報
 
 %section
   .container
@@ -24,12 +24,28 @@
             %td#taxi= @order.taxis.first.try(:name)
           %tr
             %th= t("activerecord.attributes.order.assigned_at")
-            %td#assigned_at= @order.assigned_at
-
+            - if current_user.admin?
+              %td#assigned_at= @order.assigned_at.strftime("%m月%d日 %H:%M") rescue nil
+            - else
+              %td#assigned_at= @order.assigned_at.strftime("%H:%M") rescue nil
+          - if current_user.admin?
+            %tr
+              %th= t("activerecord.attributes.order.picked_up_at")
+              %td#assigned_at= @order.picked_up_at.strftime("%m月%d日 %H:%M") rescue nil
+            %tr
+              %th= t("activerecord.attributes.order.arrived_at")
+              %td#assigned_at= @order.arrived_at.strftime("%m月%d日 %H:%M") rescue nil
         = hidden_field_tag "order_device_token", @order.device_token
-
+        = hidden_field_tag "websocket_url" , @websocket_url
 .container
   .row
-    #loading.text-center= image_tag "/loading.gif"
+    #loading.text-center.hidden= image_tag "/loading.gif"
     .col-lg-10.col-lg-offset-1.text-center
-      .vertical-margin-50= link_to t("links.order.back"), new_order_path, class: "btn btn-default btn-lg disabled"
+      - if current_user.admin?
+        / Map
+        %section#contact.map
+          %iframe{:frameborder => "0", :height => "100%", :marginheight => "0", :marginwidth => "0", :scrolling => "no", :width => "100%", :src => "https://maps.google.com/maps?hl=ja&ie=UTF8&q=#{@order.address}&output=embed"}
+
+        .vertical-margin-50= link_to t("links.back"), orders_path, class: "btn btn-default btn-lg"
+      - else
+        #order_back.vertical-margin-50= link_to t("links.order.back"), new_order_path, class: "btn btn-default btn-lg disabled"

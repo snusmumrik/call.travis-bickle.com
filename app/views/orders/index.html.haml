@@ -6,20 +6,29 @@
 %section
   .container
     = paginate @orders
-    - @orders.each do |order|
-      .row
-        .col-lg-12.text-center
-          %h2= order.address
-          %span.lead
-            = order.keyword
-            = order.taxis.first.try(:name)
-            = order.assigned_at.strftime("%Y年%m月%d日 %H時%M分%S秒") if order.assigned_at
-            = order.picked_up_at.strftime("%Y年%m月%d日 %H時%M分%S秒") if order.picked_up_at
-            = order.arrived_at.strftime("%Y年%m月%d日 %H時%M分%S秒") if order.arrived_at
-          = link_to t("links.edit"), edit_order_path(order)
-          = link_to t("links.destroy"), order, method: :delete, data: { confirm: t("messages.are_you_sure") }
-      %hr.small
-    / /.row
+
+    %table.table
+      %tr
+        %th= t("activerecord.attributes.order.address")
+        %th= t("activerecord.attributes.order.keyword")
+        %th= t("activerecord.attributes.order.taxis")
+        %th= t("activerecord.attributes.order.assigned_at")
+        %th= t("activerecord.attributes.order.picked_up_at")
+        %th= t("activerecord.attributes.order.arrived_at")
+        %th
+      - @orders.each do |order|
+        %tr
+          %td= order.address
+          %td= order.keyword
+          %td= order.taxis.first.try(:name)
+          %td= order.assigned_at.strftime("%m月%d日 %H時%M分") if order.assigned_at
+          %td= order.picked_up_at.strftime("%H時%M分") if order.picked_up_at
+          %td= order.arrived_at.strftime("%H時%M分") if order.arrived_at
+          %td
+            = link_to t("links.show"), order, class: "btn btn-default btn-sm"
+            = link_to t("links.edit"), edit_order_path(order), class: "btn btn-default btn-sm"
+            = link_to t("links.destroy"), order, method: :delete, data: { confirm: t("messages.are_you_sure") }, class: "btn btn-default btn-sm"
+
     = paginate @orders
   / /.container
 
