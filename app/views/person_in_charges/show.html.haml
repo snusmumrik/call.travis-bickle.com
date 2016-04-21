@@ -1,7 +1,18 @@
-%p
-  %b Name:
-  = @person_in_charge.name
+.container
+  .row
+    .col-lg-10.col-lg-offset-1.text-center
+      %h2= t("activerecord.models.person_in_charge") + t("views.index")
 
-= link_to 'Edit', edit_person_in_charge_path(@person_in_charge)
-\|
-= link_to 'Back', person_in_charges_path
+%section
+  .container
+    .row
+      .col-lg-12.text-center
+        %h2= @person_in_charge.name
+        = link_to t("links.edit"), edit_person_in_charge_path(@person_in_charge), class: "btn btn-default"
+        = link_to t("links.destroy"), @person_in_charge, method: :delete, data: { confirm: t("messages.are_you_sure") }, class: "btn btn-default"
+    %hr.small
+  / /.row
+  / /.container
+
+.text-center
+  = link_to t("links.back"), person_in_charges_path, class: "btn btn-default"

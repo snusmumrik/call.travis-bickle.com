@@ -30,7 +30,7 @@ class TaxisController < ApplicationController
 
     respond_to do |format|
       if @taxi.save
-        format.html { redirect_to @taxi, notice: 'Taxi was successfully created.' }
+        format.html { redirect_to @taxi, notice: t("activerecord.models.taxi") + t("messages.created") }
         format.json { render :show, status: :created, location: @taxi }
       else
         format.html { render :new }
@@ -44,7 +44,7 @@ class TaxisController < ApplicationController
   def update
     respond_to do |format|
       if @taxi.update(taxi_params)
-        format.html { redirect_to @taxi, notice: 'Taxi was successfully updated.' }
+        format.html { redirect_to @taxi, notice: t("activerecord.models.taxi") + t("messages.updated") }
         format.json { render :show, status: :ok, location: @taxi }
       else
         format.html { render :edit }
@@ -58,7 +58,7 @@ class TaxisController < ApplicationController
   def destroy
     @taxi.destroy
     respond_to do |format|
-      format.html { redirect_to taxis_url, notice: 'Taxi was successfully destroyed.' }
+      format.html { redirect_to taxis_url, notice: t("activerecord.models.taxi") + t("messages.destroyed") }
       format.json { head :no_content }
     end
   end

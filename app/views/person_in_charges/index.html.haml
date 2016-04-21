@@ -10,8 +10,9 @@
       .row
         .col-lg-12.text-center
           %h2= person_in_charge.name
-          = link_to t("links.edit"), edit_person_in_charge_path(person_in_charge)
-          = link_to t("links.destroy"), person_in_charge, method: :delete, data: { confirm: t("messages.are_you_sure") }
+          = link_to t("links.show"), person_in_charge, class: "btn btn-default btn-sm"
+          = link_to t("links.edit"), edit_person_in_charge_path(person_in_charge), class: "btn btn-default btn-sm"
+          = link_to t("links.destroy"), person_in_charge, method: :delete, data: { confirm: t("messages.are_you_sure") }, class: "btn btn-default btn-sm"
       %hr.small
     / /.row
     = paginate @person_in_charges

@@ -1,7 +1,6 @@
-%h1 Editing taxi
-
-= render 'form'
-
-= link_to 'Show', @taxi
-\|
-= link_to 'Back', taxis_path
+.container
+  .row
+    .col-lg-10.col-lg-offset-1
+      %h2.text-center= t("activerecord.models.taxi") + t("views.edit")
+      = render 'form'
+      = link_to t("links.back"), taxis_path, class: "btn btn-default"

@@ -1,10 +1,18 @@
-%p
-  %b Name:
-  = @taxi.name
-%p
-  %b Type_name:
-  = @taxi.type_name
+.container
+  .row
+    .col-lg-10.col-lg-offset-1.text-center
+      %h2= t("activerecord.models.taxi") + t("views.index")
 
-= link_to 'Edit', edit_taxi_path(@taxi)
-\|
-= link_to 'Back', taxis_path
+%section
+  .container
+    .row
+      .col-lg-12.text-center
+        %h2= @taxi.name
+        = link_to t("links.edit"), edit_taxi_path(@taxi), class: "btn btn-default"
+        = link_to t("links.destroy"), @taxi, method: :delete, data: { confirm: t("messages.are_you_sure") }, class: "btn btn-default"
+      %hr.small
+    / /.row
+  / /.container
+
+.text-center
+  = link_to t("links.back"), taxis_path, class: "btn btn-default"

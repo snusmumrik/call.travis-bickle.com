@@ -30,7 +30,7 @@ class PersonInChargesController < ApplicationController
 
     respond_to do |format|
       if @person_in_charge.save
-        format.html { redirect_to @person_in_charge, notice: 'Person in charge was successfully created.' }
+        format.html { redirect_to @person_in_charge, notice: t("activerecord.models.person_in_charge") + t("messages.created") }
         format.json { render :show, status: :created, location: @person_in_charge }
       else
         format.html { render :new }
@@ -44,7 +44,7 @@ class PersonInChargesController < ApplicationController
   def update
     respond_to do |format|
       if @person_in_charge.update(person_in_charge_params)
-        format.html { redirect_to @person_in_charge, notice: 'Person in charge was successfully updated.' }
+        format.html { redirect_to @person_in_charge, notice: t("activerecord.models.person_in_charge") + t("messages.updated") }
         format.json { render :show, status: :ok, location: @person_in_charge }
       else
         format.html { render :edit }
@@ -58,7 +58,7 @@ class PersonInChargesController < ApplicationController
   def destroy
     @person_in_charge.destroy
     respond_to do |format|
-      format.html { redirect_to person_in_charges_url, notice: 'Person in charge was successfully destroyed.' }
+      format.html { redirect_to person_in_charges_url, notice: t("activerecord.models.person_in_charge") + t("messages.destroyed") }
       format.json { head :no_content }
     end
   end

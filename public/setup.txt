@@ -1,0 +1,4 @@
+User.create(name: "管理者", email: "hombredeestemundo@gmail.com", password: "hill1000" , password_confirmation: "hill1000", admin: true
+irb(main):008:1> )
+
+User.create(parent_id: "2", name: "端末１", email: "test@test.com", password: "password" , password_confirmation: "password")

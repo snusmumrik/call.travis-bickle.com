@@ -1,7 +1,6 @@
-%h1 Editing person_in_charge
-
-= render 'form'
-
-= link_to 'Show', @person_in_charge
-\|
-= link_to 'Back', person_in_charges_path
+.container
+  .row
+    .col-lg-10.col-lg-offset-1
+      %h2.text-center= t("activerecord.models.person_in_charge") + t("views.edit")
+      = render 'form'
+      = link_to t("links.back"), person_in_charges_path, class: "btn btn-default"

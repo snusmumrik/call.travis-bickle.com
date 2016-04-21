@@ -44,37 +44,38 @@
   -#           %li= link_to t("links.user.sign_up"), new_user_registration_path
 
   / Navigation
-  %a#menu-toggle.btn.btn-dark.btn-lg.toggle{href: "#"}
-    %i.fa.fa-bars
-  %nav#sidebar-wrapper
-    %ul.sidebar-nav
-      %a#menu-close.btn.btn-light.btn-lg.pull-right.toggle{href: "#"}
-        %i.fa.fa-times
-      %li.sidebar-brand
-        %a{href: "/", onclick: "$(\"#menu-close\").click();"} タクシーボタン
-      - if controller.controller_name == "contents" && controller.action_name == "index"
-        -# %li
-        -#   %a{href: "#top", onclick: "$(\"#menu-close\").click();"} Home
-        -# %li
-        -#   %a{href: "#about", onclick: "$(\"#menu-close\").click();"} About
-        -# %li
-        -#   %a{href: "#services", onclick: "$(\"#menu-close\").click();"} Services
-        -# %li
-        -#   %a{href: "#portfolio", onclick: "$(\"#menu-close\").click();"} Portfolio
-        -# %li
-        -#   %a{href: "#contact", onclick: "$(\"#menu-close\").click();"} Contact
-      - if user_signed_in? && current_user.admin?
-        %li= link_to t("activerecord.models.taxi"), taxis_path
-        %li= link_to t("activerecord.models.person_in_charge"), person_in_charges_path
-        %li= link_to t("activerecord.models.order"), orders_path
-        %li= link_to t("links.user.sign_out"), destroy_user_session_path, method: :delete, data: { confirm: t("messages.user.sign_out") }
-      - elsif user_signed_in?
-        %li= link_to t("views.new") + t("activerecord.models.order"), new_order_path
-        %li= link_to t("links.user.sign_out"), destroy_user_session_path, method: :delete, data: { confirm: t("messages.user.sign_out") }
-      - else
-        %li= link_to t("links.user.sign_in"), new_user_session_path
-        -# %li= link_to t("links.user.sign_up"), user_registration_path
-      / /.nav-collapse
+  - if user_signed_in? && current_user.admin?
+    %a#menu-toggle.btn.btn-dark.btn-lg.toggle{href: "#"}
+      %i.fa.fa-bars
+    %nav#sidebar-wrapper
+      %ul.sidebar-nav
+        %a#menu-close.btn.btn-light.btn-lg.pull-right.toggle{href: "#"}
+          %i.fa.fa-times
+        %li.sidebar-brand
+          %a{href: "/", onclick: "$(\"#menu-close\").click();"} タクシーボタン
+        - if controller.controller_name == "contents" && controller.action_name == "index"
+          -# %li
+          -#   %a{href: "#top", onclick: "$(\"#menu-close\").click();"} Home
+          -# %li
+          -#   %a{href: "#about", onclick: "$(\"#menu-close\").click();"} About
+          -# %li
+          -#   %a{href: "#services", onclick: "$(\"#menu-close\").click();"} Services
+          -# %li
+          -#   %a{href: "#portfolio", onclick: "$(\"#menu-close\").click();"} Portfolio
+          -# %li
+          -#   %a{href: "#contact", onclick: "$(\"#menu-close\").click();"} Contact
+        - if user_signed_in? && current_user.admin?
+          %li= link_to t("activerecord.models.taxi"), taxis_path
+          %li= link_to t("activerecord.models.person_in_charge"), person_in_charges_path
+          %li= link_to t("activerecord.models.order"), orders_path
+          %li= link_to t("links.user.sign_out"), destroy_user_session_path, method: :delete, data: { confirm: t("messages.user.sign_out") }
+        - elsif user_signed_in?
+          %li= link_to t("views.new") + t("activerecord.models.order"), new_order_path
+          %li= link_to t("links.user.sign_out"), destroy_user_session_path, method: :delete, data: { confirm: t("messages.user.sign_out") }
+        - else
+          %li= link_to t("links.user.sign_in"), new_user_session_path
+          -# %li= link_to t("links.user.sign_up"), user_registration_path
+        / /.nav-collapse
 
   - if notice
     .alert.alert-success
