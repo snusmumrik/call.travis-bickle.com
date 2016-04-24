@@ -11,6 +11,7 @@ ja:
     attributes:
       order:
         address: 住所
+        amount: 台数
         arrived_at: 到着
         assigned_at: 到着予定
         deleted_at: deleted_at  #g
@@ -19,6 +20,7 @@ ja:
         longitude: 経度
         picked_up_at: 乗車
         taxi: 車両
+        time: 時間指定
         device_token: "デバイストークン"  #g
         person_in_charges: "料金の人物"  #g
         taxis: "タクシー"  #g

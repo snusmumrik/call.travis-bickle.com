@@ -21,6 +21,13 @@
             %th= t("activerecord.attributes.order.address")
             %td= @order.address
           %tr
+            %th= t("activerecord.attributes.order.amount")
+            %td= @order.amount
+          %tr
+            %th= t("activerecord.attributes.order.time")
+            %td
+              = @order.time.strftime("%H:%M") rescue nil
+          %tr
             %th= t("activerecord.attributes.order.keyword")
             %td.big= @order.keyword
           %tr

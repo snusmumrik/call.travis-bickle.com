@@ -20,6 +20,10 @@ class OrdersController < ApplicationController
   # GET /orders/new
   def new
     @order = Order.new
+    @amount_option = []
+      for i in 1..5
+        @amount_option << ["#{i}台", i]
+    end
   end
 
   # GET /orders/1/edit
@@ -119,6 +123,6 @@ class OrdersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def order_params
-    params.require(:order).permit(:parent_id, :address, :latitude, :longitude, :keyword, :device_token, :assigned_at, :picked_up_at, :arrived_at)
+    params.require(:order).permit(:parent_id, :address, :latitude, :longitude, :amount, :time, :keyword, :device_token, :assigned_at, :picked_up_at, :arrived_at)
   end
 end

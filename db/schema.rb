@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160417092322) do
+ActiveRecord::Schema.define(version: 20160424055950) do
 
   create_table "orders", force: :cascade do |t|
     t.integer  "parent_id",    limit: 4
@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(version: 20160417092322) do
     t.string   "address",      limit: 255
     t.float    "latitude",     limit: 24
     t.float    "longitude",    limit: 24
+    t.integer  "amount",       limit: 4
+    t.datetime "time"
     t.string   "keyword",      limit: 255
     t.string   "device_token", limit: 255
     t.datetime "assigned_at"

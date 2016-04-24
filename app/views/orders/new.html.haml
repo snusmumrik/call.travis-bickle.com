@@ -7,6 +7,11 @@
         = f.hidden_field :latitude
         = f.hidden_field :longitude
         = f.hidden_field :device_token, value: (0...40).map{ ("A".."Z").to_a[rand(26)] }.join
+        .title.big= f.label :amount
+        = f.select :amount, options_for_select(@amount_option), {}, class: "form-control"
+        .title.big= f.label :time
+        = f.text_field :time, class: "form-control datetimepicker", placeholder: "時間指定をする場合"
+
         .text-center= image_submit_tag "/button.png", id: "send"
 
 %audio#sound-file1{preload: "auto"}
