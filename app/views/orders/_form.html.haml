@@ -35,13 +35,13 @@
   .field
     = f.label :arrived_at
     = f.text_field :arrived_at, class: "form-control datetimepicker"
+  .actions
+    = f.submit id: "order_submit",  class: "btn btn-default"
+    = link_to t("links.back"), orders_path, class: "btn btn-default"
 
   .field
     / Map
     %section#contact.map
       %iframe{:frameborder => "0", :height => "100%", :marginheight => "0", :marginwidth => "0", :scrolling => "no", :width => "100%", :src => "https://maps.google.com/maps?hl=ja&ie=UTF8&q=#{@order.address}&output=embed"}
-
-  .actions
-    = f.submit id: "order_submit",  class: "btn btn-default"
 
 = hidden_field_tag "websocket_url" , @websocket_url

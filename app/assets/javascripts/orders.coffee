@@ -13,3 +13,6 @@ $ ->
     $('#loading').removeClass('hidden')
   else
     $('#order_back a').removeClass('disabled')
+
+  $('#send').click ->
+    $('#sound-file1').get(0).play()

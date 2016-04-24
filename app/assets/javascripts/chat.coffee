@@ -1,4 +1,3 @@
-# Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
@@ -16,14 +15,15 @@ class @ChatClass
     # サーバーからnew_messageを受け取ったreceiveMessageを実行
     @channel.bind 'update_message', @receiveMessage
 
-  # sendMessage: (event) =>
-  #   alert 'send'
-  #   # サーバ側にsend_messageのイベントを送信
-  #   # オブジェクトでデータを指定
-  #   # temporary
-  #   # @device_token = generate_token(40)
-  #   # $('#order_device_token').val(@device_token)
-  #   @channel.trigger 'new_message', { device_token: @device_token }
+  sendMessage: (event) =>
+    # alert 'send'
+    # $('#sound-file1').get(0).play()
+    # サーバ側にsend_messageのイベントを送信
+    # オブジェクトでデータを指定
+    # temporary
+    # @device_token = generate_token(40)
+    # $('#order_device_token').val(@device_token)
+    # @channel.trigger 'new_message', { device_token: @device_token }
 
   updateMessage: (event) =>
     # alert 'update'
@@ -35,6 +35,7 @@ class @ChatClass
 
   receiveMessage: (message) =>
     # alert 'receive'
+    $('#sound-file3').get(0).play()
     console.log message
     $('#taxi').html(message['taxi'])
     $('#assigned_at').html(message['assigned_at'])

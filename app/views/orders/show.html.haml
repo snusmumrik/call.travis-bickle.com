@@ -2,13 +2,15 @@
   .row
     .col-lg-10.col-lg-offset-1.text-center
       - if user_signed_in? && current_user.admin
-        %h2.vertical-margin-50 配車依頼情報
+        %h2.title 配車依頼情報
+      - elsif !@order.taxis.blank? && !@order.assigned_at.blank?
+        %h2#title.title 配車が確定しました。
+        %h3.title
+          #sub-title 車両到着時に合言葉の確認をお願いいたします。
       - else
-        %h2#title.vertical-margin-50 配車のご依頼を承りました。
-        .vertical-margin-50
-          %b#sub-title 情報が更新されるまで、しばらくこのままでお待ちください。
-
-
+        %h2#title.title 配車のご依頼を承りました。
+        %h3.title
+          #sub-title 情報が更新されるまで、しばらくこのままでお待ちください。
 
 %section
   .container
@@ -20,16 +22,16 @@
             %td= @order.address
           %tr
             %th= t("activerecord.attributes.order.keyword")
-            %td= @order.keyword
+            %td.big= @order.keyword
           %tr
             %th= t("activerecord.attributes.order.taxi")
-            %td#taxi= @order.taxis.first.try(:name)
+            %td#taxi.big= @order.taxis.first.try(:name)
           %tr
             %th= t("activerecord.attributes.order.assigned_at")
             - if current_user.admin?
               %td#assigned_at= @order.assigned_at.strftime("%m月%d日 %H:%M") rescue nil
             - else
-              %td#assigned_at= @order.assigned_at.strftime("%H:%M") rescue nil
+              %td#assigned_at.big= @order.assigned_at.strftime("%H:%M") rescue nil
           - if current_user.admin?
             %tr
               %th= t("activerecord.attributes.order.picked_up_at")
@@ -45,12 +47,22 @@
       #loading.text-center.hidden= image_tag "/loading.gif"
     .col-lg-10.col-lg-offset-1.text-center
       - if current_user.admin?
+        .actions
+          = link_to t("links.edit"), edit_order_path(@order), class: "btn btn-default"
+          = link_to t("links.back"), orders_path, class: "btn btn-default"
         / Map
         %section#contact.map
           %iframe{:frameborder => "0", :height => "100%", :marginheight => "0", :marginwidth => "0", :scrolling => "no", :width => "100%", :src => "https://maps.google.com/maps?hl=ja&ie=UTF8&q=#{@order.address}&output=embed"}
-
-        .vertical-margin-50
-          = link_to t("links.edit"), edit_order_path(@order), class: "btn btn-default btn-lg"
-          = link_to t("links.back"), orders_path, class: "btn btn-default btn-lg"
       - else
-        #order_back.vertical-margin-50= link_to t("links.order.back"), new_order_path, class: "btn btn-default btn-lg disabled"
+        #order_back= link_to t("links.order.back"), new_order_path, class: "btn btn-default btn-lg disabled"
+
+- if current_user.admin.blank?
+  %audio#sound-file2{preload: "auto"}
+    %source{src: "/sounds/shake.mp3", type: "audio/mp3"}n
+%audio#sound-file3{preload: "auto"}
+  %source{src: "/sounds/SIMToolkitPositiveACK.mp3", type: "audio/mp3"}
+
+:javascript
+  if(document.getElementById('sound-file2') != null) {
+  document.getElementById('sound-file2').play()
+  }
