@@ -1,14 +1,13 @@
 .container
   .row
-    -# .col-lg-10.col-lg-offset-1
-    -#   %h2.text-center= t("activerecord.models.order") + t("views.new")
+    .col-lg-10.col-lg-offset-1
+      %h2.title.text-center= t("links.order.new")
 
-    .vertical-margin-50.text-center
       = form_for @order, html: {"data-type" => "json", class: "form-signin"} do |f|
         = f.hidden_field :latitude
         = f.hidden_field :longitude
         = f.hidden_field :device_token, value: (0...40).map{ ("A".."Z").to_a[rand(26)] }.join
-        = f.submit t("links.order.new"), id: "send", class: "btn btn-default btn-lg"
+      .text-center= link_to image_tag("/button.png"), id: "send", class: "btn btn-default btn-lg"
 
 :javascript
   // ユーザーの端末がGeoLocation APIに対応しているかの判定

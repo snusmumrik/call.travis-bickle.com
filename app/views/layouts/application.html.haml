@@ -16,105 +16,108 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
   %body
-  / Fixed navbar
-  / For narrow display navbar
+    / Fixed navbar
+    / For narrow display navbar
 
-  -# .navbar.navbar-default.navbar-fixed-top{role: "navigation"}
-  -#   .container
-  -#     .navbar-header
-  -#       %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", type: "button"}
-  -#         %span.sr-only Toggle navigation
-  -#         %span.icon-bar
-  -#         %span.icon-bar
-  -#         %span.icon-bar
-  -#       = link_to "タクシーボタン", root_path, class: "navbar-brand"
-  -#     .navbar-collapse.collapse
-  -#       %ul.nav.navbar-nav
-  -#         %li= link_to t("activerecord.models.taxi"), taxis_path
-  -#         %li= link_to t("activerecord.models.person_in_charge"), person_in_charges_path
+    -# .navbar.navbar-default.navbar-fixed-top{role: "navigation"}
+    -#   .container
+    -#     .navbar-header
+    -#       %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", type: "button"}
+    -#         %span.sr-only Toggle navigation
+    -#         %span.icon-bar
+    -#         %span.icon-bar
+    -#         %span.icon-bar
+    -#       = link_to "タクシーボタン", root_path, class: "navbar-brand"
+    -#     .navbar-collapse.collapse
+    -#       %ul.nav.navbar-nav
+    -#         %li= link_to t("activerecord.models.taxi"), taxis_path
+    -#         %li= link_to t("activerecord.models.person_in_charge"), person_in_charges_path
 
-  -#       %ul.nav.navbar-nav.navbar-right
-  -#         %li= link_to t("links.about"), "/about"
-  -#         %li= link_to t("links.faq"), "/faq"
-  -#         %li= link_to t("links.contact"), "/contact"
-  -#         - if user_signed_in?
-  -#           %li= link_to t("links.user.sign_out"), destroy_user_session_path, method: :delete, data: { confirm: t("messages.user.sign_out") }
-  -#         - else
-  -#           %li= link_to t("links.user.sign_in"), new_user_session_path
-  -#           %li= link_to t("links.user.sign_up"), new_user_registration_path
+    -#       %ul.nav.navbar-nav.navbar-right
+    -#         %li= link_to t("links.about"), "/about"
+    -#         %li= link_to t("links.faq"), "/faq"
+    -#         %li= link_to t("links.contact"), "/contact"
+    -#         - if user_signed_in?
+    -#           %li= link_to t("links.user.sign_out"), destroy_user_session_path, method: :delete, data: { confirm: t("messages.user.sign_out") }
+    -#         - else
+    -#           %li= link_to t("links.user.sign_in"), new_user_session_path
+    -#           %li= link_to t("links.user.sign_up"), new_user_registration_path
 
-  / Navigation
-  - if user_signed_in? && current_user.admin?
-    %a#menu-toggle.btn.btn-dark.btn-lg.toggle{href: "#"}
-      %i.fa.fa-bars
-    %nav#sidebar-wrapper
-      %ul.sidebar-nav
-        %a#menu-close.btn.btn-light.btn-lg.pull-right.toggle{href: "#"}
-          %i.fa.fa-times
-        %li.sidebar-brand
-          %a{href: "/", onclick: "$(\"#menu-close\").click();"} タクシーボタン
-        - if controller.controller_name == "contents" && controller.action_name == "index"
-          -# %li
-          -#   %a{href: "#top", onclick: "$(\"#menu-close\").click();"} Home
-          -# %li
-          -#   %a{href: "#about", onclick: "$(\"#menu-close\").click();"} About
-          -# %li
-          -#   %a{href: "#services", onclick: "$(\"#menu-close\").click();"} Services
-          -# %li
-          -#   %a{href: "#portfolio", onclick: "$(\"#menu-close\").click();"} Portfolio
-          -# %li
-          -#   %a{href: "#contact", onclick: "$(\"#menu-close\").click();"} Contact
-        - if user_signed_in? && current_user.admin?
-          %li= link_to t("activerecord.models.taxi"), taxis_path
-          %li= link_to t("activerecord.models.person_in_charge"), person_in_charges_path
-          %li= link_to t("activerecord.models.order"), orders_path
-          %li= link_to t("links.user.sign_out"), destroy_user_session_path, method: :delete, data: { confirm: t("messages.user.sign_out") }
-        - elsif user_signed_in?
-          %li= link_to t("views.new") + t("activerecord.models.order"), new_order_path
-          %li= link_to t("links.user.sign_out"), destroy_user_session_path, method: :delete, data: { confirm: t("messages.user.sign_out") }
-        - else
-          %li= link_to t("links.user.sign_in"), new_user_session_path
-          -# %li= link_to t("links.user.sign_up"), user_registration_path
-        / /.nav-collapse
+    / Navigation
+    - if user_signed_in? && current_user.admin?
+      %a#menu-toggle.btn.btn-dark.btn-lg.toggle{href: "#"}
+        %i.fa.fa-bars
+      %nav#sidebar-wrapper
+        %ul.sidebar-nav
+          %a#menu-close.btn.btn-light.btn-lg.pull-right.toggle{href: "#"}
+            %i.fa.fa-times
+          %li.sidebar-brand
+            %a{href: "/", onclick: "$(\"#menu-close\").click();"} タクシーボタン
+          - if controller.controller_name == "contents" && controller.action_name == "index"
+            -# %li
+            -#   %a{href: "#top", onclick: "$(\"#menu-close\").click();"} Home
+            -# %li
+            -#   %a{href: "#about", onclick: "$(\"#menu-close\").click();"} About
+            -# %li
+            -#   %a{href: "#services", onclick: "$(\"#menu-close\").click();"} Services
+            -# %li
+            -#   %a{href: "#portfolio", onclick: "$(\"#menu-close\").click();"} Portfolio
+            -# %li
+            -#   %a{href: "#contact", onclick: "$(\"#menu-close\").click();"} Contact
+          - if user_signed_in? && current_user.admin?
+            %li= link_to t("activerecord.models.taxi"), taxis_path
+            %li= link_to t("activerecord.models.person_in_charge"), person_in_charges_path
+            %li= link_to t("activerecord.models.order"), orders_path
+            %li= link_to t("links.user.sign_out"), destroy_user_session_path, method: :delete, data: { confirm: t("messages.user.sign_out") }
+          - elsif user_signed_in?
+            %li= link_to t("views.new") + t("activerecord.models.order"), new_order_path
+            %li= link_to t("links.user.sign_out"), destroy_user_session_path, method: :delete, data: { confirm: t("messages.user.sign_out") }
+          - else
+            %li= link_to t("links.user.sign_in"), new_user_session_path
+            -# %li= link_to t("links.user.sign_up"), user_registration_path
+          / /.nav-collapse
 
-  - if notice
-    .alert.alert-success
-      %p#notice= notice
-  - if alert
-    .alert.alert-error
-      %p#alert= alert
+    - if notice
+      .alert.alert-success
+        %p#notice= notice
+    - if alert
+      .alert.alert-error
+        %p#alert= alert
 
-  = yield
+    - if controller.controller_name == "contents"
+      = yield
+    - else
+      #wrap= yield
 
   / Footer
-  %footer
+  %footer.footer
     .container
-      .row
-        .col-lg-10.col-lg-offset-1.text-center
-          %h4
-            %strong= link_to "タクシーボタン", root_path
-          -# %p 沖縄県中頭郡西原町小那覇1193番地の5
-          -# %ul.list-unstyled
-          -#   %li
-          -#     %i.fa.fa-phone.fa-fw
-          -#     (098)946-5000
-          -#   %li
-          -#     %i.fa.fa-envelope-o.fa-fw
-          -#     %a{href: "mailto:toshin@d3.dion.ne.jp"} toshin@d3.dion.ne.jp
-          -#   %li= link_to "http://www.toshin-ry.com", "http://www.toshin-ry.com"
+      -# .row
+      .col-lg-10.col-lg-offset-1.text-center
+        -# %h4
+        %strong= link_to "タクシーボタン", root_path
+        -# %p 沖縄県中頭郡西原町小那覇1193番地の5
+        -# %ul.list-unstyled
+        -#   %li
+        -#     %i.fa.fa-phone.fa-fw
+        -#     (098)946-5000
+        -#   %li
+        -#     %i.fa.fa-envelope-o.fa-fw
+        -#     %a{href: "mailto:toshin@d3.dion.ne.jp"} toshin@d3.dion.ne.jp
+        -#   %li= link_to "http://www.toshin-ry.com", "http://www.toshin-ry.com"
 
-          -# %br/
-          -# %ul.list-inline
-          -#   %li
-          -#     %a{href: "#"}
-          -#       %i.fa.fa-facebook.fa-fw.fa-3x
-          -#   %li
-          -#     %a{href: "#"}
-          -#       %i.fa.fa-twitter.fa-fw.fa-3x
-          -#   %li
-          -#     %a{href: "#"}
-          -#       %i.fa.fa-dribbble.fa-fw.fa-3x
-          -# %hr.small/
-          %p.text-muted Copyright © #{Date.today.year} #{link_to "", root_path}
+        -# %br/
+        -# %ul.list-inline
+        -#   %li
+        -#     %a{href: "#"}
+        -#       %i.fa.fa-facebook.fa-fw.fa-3x
+        -#   %li
+        -#     %a{href: "#"}
+        -#       %i.fa.fa-twitter.fa-fw.fa-3x
+        -#   %li
+        -#     %a{href: "#"}
+        -#       %i.fa.fa-dribbble.fa-fw.fa-3x
+        -# %hr.small/
+        %p.text-muted Copyright © #{Date.today.year} #{link_to "", root_path}
 
   = javascript_include_tag "application", "data-turbolinks-track" => true
