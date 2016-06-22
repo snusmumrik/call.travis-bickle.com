@@ -2,8 +2,8 @@
 
 class Order < ActiveRecord::Base
   belongs_to :user
-  has_and_belongs_to_many :taxis
-  has_and_belongs_to_many :person_in_charges
+  has_and_belongs_to_many :taxis, dependent: :destroy
+  has_and_belongs_to_many :person_in_charges, dependent: :destroy
 
   acts_as_paranoid
 

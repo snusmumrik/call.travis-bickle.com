@@ -89,6 +89,12 @@
     - else
       #wrap= yield
 
+    = hidden_field_tag "websocket_url" , @websocket_url
+    - if current_user.admin.nil?
+      = hidden_field_tag "parent_id", current_user.parent_id
+    - else
+      = hidden_field_tag "parent_id", current_user.id
+
   / Footer
   %footer.footer
     .container
@@ -121,3 +127,8 @@
         %p.text-muted Copyright © #{Date.today.year} #{link_to "", root_path}
 
   = javascript_include_tag "application", "data-turbolinks-track" => true
+
+  %audio#sound-file1{preload: "auto"}
+    %source{src: "/sounds/sq_lock.mp3", type: "audio/mp3"}
+  %audio#sound-file2{preload: "auto"}
+    %source{src: "/sounds/SIMToolkitPositiveACK.mp3", type: "audio/mp3"}

@@ -12,10 +12,7 @@
         .title.big= f.label :time
         = f.text_field :time, class: "form-control datetimepicker", placeholder: "時間指定をする場合"
 
-        .text-center= image_submit_tag "/button.png", id: "send"
-
-%audio#sound-file1{preload: "auto"}
-  %source{src: "/sounds/sq_lock.mp3", type: "audio/mp3"}
+        .text-center= image_submit_tag "/button.png", id: "create"
 
 :javascript
   // ユーザーの端末がGeoLocation APIに対応しているかの判定

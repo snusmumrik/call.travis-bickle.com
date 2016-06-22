@@ -6,7 +6,7 @@ $ ->
   if ($('.datetimepicker').length)
     $('.datetimepicker').datetimepicker
       locale: "ja"
-      format: "YYYY/MM/DD HH:mm"
+      format: "HH:mm"
       sideBySide: true
 
   if $('#taxi').text() == '' || $('#assigned_at').text() == ''
@@ -14,5 +14,5 @@ $ ->
   else
     $('#order_back a').removeClass('disabled')
 
-  $('#send').click ->
-    $('#sound-file1').get(0).play()
+  $('.refresh').click ->
+    location.reload()

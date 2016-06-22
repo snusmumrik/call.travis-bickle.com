@@ -4,7 +4,8 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_order, only: [:show, :edit, :update, :destroy]
   before_action :set_taxi, only: [:new, :create, :edit, :update]
-  before_action :set_websocket_url, only: [:show, :edit]
+  before_action :set_amount, only: [:new, :create]
+  before_action :set_websocket_url
 
   # GET /orders
   # GET /orders.json
@@ -20,10 +21,6 @@ class OrdersController < ApplicationController
   # GET /orders/new
   def new
     @order = Order.new
-    @amount_option = []
-      for i in 1..5
-        @amount_option << ["#{i}台", i]
-    end
   end
 
   # GET /orders/1/edit
@@ -91,6 +88,13 @@ class OrdersController < ApplicationController
 
   def set_taxi
     @taxis = Taxi.all.inject(Array.new) {|a, t| a << [t.name, t.id]; a}
+  end
+
+  def set_amount
+    @amount_option = []
+    for i in 1..5
+      @amount_option << ["#{i}台", i]
+    end
   end
 
   def set_websocket_url

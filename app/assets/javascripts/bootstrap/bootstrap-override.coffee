@@ -1,3 +1,3 @@
-$(".alert p").fadeOut(3000, ->
+$(".alert p").fadeOut(5000, ->
   $(".alert").hide('slow')
   );
