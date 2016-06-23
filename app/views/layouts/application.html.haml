@@ -52,7 +52,7 @@
           %a#menu-close.btn.btn-light.btn-lg.pull-right.toggle{href: "#"}
             %i.fa.fa-times
           %li.sidebar-brand
-            %a{href: "/", onclick: "$(\"#menu-close\").click();"} タクシーボタン
+            %a{href: "/", onclick: "$(\"#menu-close\").click();"}= current_user.name
           - if controller.controller_name == "contents" && controller.action_name == "index"
             -# %li
             -#   %a{href: "#top", onclick: "$(\"#menu-close\").click();"} Home
