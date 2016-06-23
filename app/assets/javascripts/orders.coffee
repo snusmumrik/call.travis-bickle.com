@@ -13,6 +13,3 @@ $ ->
     $('#loading').removeClass('hidden')
   else
     $('#order_back a').removeClass('disabled')
-
-  $('.refresh').click ->
-    location.reload()

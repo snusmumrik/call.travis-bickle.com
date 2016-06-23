@@ -2,14 +2,14 @@
   .row
     .col-lg-10.col-lg-offset-1.text-center
       - if user_signed_in? && current_user.admin
-        %h2.title 配車依頼情報
+        %h1.title 配車依頼情報
       - elsif !@order.taxis.blank? && !@order.assigned_at.blank?
-        %h2#title.title 配車が確定しました。
-        %h3.title
+        %h1#title.title 配車が確定しました。
+        %h2.title
           #sub-title 車両到着時に合言葉の確認をお願いいたします。
       - else
-        %h2#title.title 配車のご依頼を承りました。
-        %h3.title
+        %h1#title.title 配車のご依頼を承りました。
+        %h2.title
           #sub-title 情報が更新されるまで、しばらくこのままでお待ちください。
 
 %section
@@ -53,15 +53,13 @@
     - unless current_user.admin?
       #loading.text-center.hidden= image_tag "/loading.gif"
     .col-lg-10.col-lg-offset-1.text-center
-      - if current_user.admin?
-        .actions
-          = link_to t("links.edit"), edit_order_path(@order), class: "btn btn-default"
+      .actions.form-inline
+        .form-group
           - if current_user.admin?
-            = link_to t("links.back"), orders_path, class: "btn btn-default"
+            = link_to t("links.back"), orders_path, class: "btn btn-lg btn-default"
+            = link_to t("links.edit"), edit_order_path(@order), class: "btn btn-lg btn-default"
           - else
-            %div{data: "no-turbolink"}= link_to t("links.back"), new_order_path, class: "btn btn-default"
-        / Map
-        %section#contact.map
-          -# %iframe{:frameborder => "0", :height => "100%", :marginheight => "0", :marginwidth => "0", :scrolling => "no", :width => "100%", :src => "https://maps.google.com/maps?hl=ja&ie=UTF8&q=#{@order.address}&output=embed"}
-      - else
-        #order_back= link_to t("links.order.back"), new_order_path, class: "btn btn-default btn-lg disabled"
+            #order_back{data: "no-turbolink"}= link_to t("links.order.back"), new_order_path, class: "btn btn-default btn-lg disabled"
+      / Map
+      -# %section#contact.map
+      -#   %iframe{:frameborder => "0", :height => "100%", :marginheight => "0", :marginwidth => "0", :scrolling => "no", :width => "100%", :src => "https://maps.google.com/maps?hl=ja&ie=UTF8&q=#{@order.address}&output=embed"}

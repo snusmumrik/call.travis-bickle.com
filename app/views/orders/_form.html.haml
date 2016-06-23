@@ -47,9 +47,9 @@
   -# .field
   -#   = f.label :arrived_at
   -#   = f.text_field :arrived_at, class: "form-control datetimepicker"
-  .actions
-    = f.submit id: "update",  class: "btn btn-default"
-    = link_to t("links.back"), orders_path, class: "btn btn-default"
+  .actions.text-center
+    = link_to t("links.back"), orders_path, class: "btn btn-lg btn-default"
+    = f.submit id: "update",  class: "btn btn-lg btn-default"
 
   -# .field
   -#   / Map

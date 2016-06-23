@@ -59,9 +59,10 @@ class OrdersController < ApplicationController
     end
 
     respond_to do |format|
+      params[:order][:assigned_at] = Time.now + params[:order][:assigned_at].to_i * 60 unless params[:order][:assigned_at].blank?
       if @order.update(order_params)
         # send_notification(@order) unless @order.assigned_at.blank? || @order.taxis.first.nil?
-        format.html { redirect_to @order, notice: t("activerecord.models.order") + t("messages.updated") }
+        format.html { redirect_to orders_path, notice: t("activerecord.models.order") + t("messages.updated") }
         format.json { render :show, status: :ok, location: @order }
       else
         format.html { render :edit }
@@ -75,7 +76,7 @@ class OrdersController < ApplicationController
   def destroy
     @order.destroy
     respond_to do |format|
-      format.html { redirect_to orders_url, notice: t("activerecord.models.order") + t("messages.destroyed") }
+      format.html { redirect_to orders_url, notice: t("activerecord.models.order") + t("messages.order.destroyed") }
       format.json { head :no_content }
     end
   end

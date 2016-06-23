@@ -4,36 +4,41 @@
 class @ChatClass
   constructor: (url, useWebsocket) ->
     @dispatcher = new WebSocketRails(url, useWebsocket)
-    @device_token = $('#order_device_token').val()
+    @device_token = $('#device_token').val()
+    @user_id = $('#user_id').val()
     @parent_id = $('#parent_id').val()
-    @admin_channel = @dispatcher.subscribe(@parent_id)
-    @client_channel = @dispatcher.subscribe(@device_token)
+    if @user_id == @parent_id
+      @admin_channel = @dispatcher.subscribe(@parent_id)
+    else if @device_token != undefined
+      @client_channel = @dispatcher.subscribe(@device_token)
     @bindEvents()
 
   bindEvents: () =>
     $('#create').on 'click', @createMessage
     $('#update').on 'click', @updateMessage
-    # サーバーからnew_messageを受け取ったらnewMessageを実行
-    @admin_channel.bind 'notify_message', @notifyMessage
-    @client_channel.bind 'confirm_message', @confirmMessage
+    # サーバーから***_messageを受け取ったら***Messageを実行
+    if @user_id == @parent_id
+      @admin_channel.bind 'notify_message', @notifyMessage
+    else if @device_token != undefined
+      @client_channel.bind 'confirm_message', @confirmMessage
 
   createMessage: (event) =>
     $('#sound-file1').get(0).play()
     # オブジェクトでデータを指定してサーバ側にsend_messageのイベントを送信
-    @dispatcher.trigger 'create_message', { parent_id: @parent_id }
+    @dispatcher.trigger 'notify_message', { parent_id: @parent_id }
 
   notifyMessage: (message) =>
     console.log message
     $('#sound-file2').get(0).play()
     $('.container').eq(0).prepend('<div class="alert alert-success"><p id="notice"></p></div>')
-    $('p#notice').hide().html("<a href src='#' class='refresh'>新しい配車依頼がありました。詳細はここをクリックして確認してください。</a>").fadeIn('slow')
+    $('p#notice').hide().html("<a href src='/orders'>新しい配車依頼がありました。詳細はここをクリックして確認してください。</a>").fadeIn('slow')
 
   updateMessage: (event) =>
     if $('#order_taxis_taxi_id').val() != '' && $('#order_assigned_at').val() != ''
       device_token = $('#order_device_token').val()
       taxi = $('#order_taxis_taxi_id option:selected').text()
-      assigned_at = $('#order_assigned_at').val()
-      @dispatcher.trigger 'update_message', { device_token: device_token, taxi: taxi, assigned_at: assigned_at }
+      assigned_at = $('#order_assigned_at').val() + '分後'
+      @dispatcher.trigger 'confirm_message', { device_token: device_token, taxi: taxi, assigned_at: assigned_at }
 
   confirmMessage: (message) =>
     console.log message

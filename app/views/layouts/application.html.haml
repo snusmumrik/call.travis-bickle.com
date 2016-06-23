@@ -90,10 +90,12 @@
       #wrap= yield
 
     = hidden_field_tag "websocket_url" , @websocket_url
-    - if current_user.admin.nil?
-      = hidden_field_tag "parent_id", current_user.parent_id
-    - else
-      = hidden_field_tag "parent_id", current_user.id
+    - if user_signed_in?
+      = hidden_field_tag "user_id", current_user.id
+      - if current_user.admin
+        = hidden_field_tag "parent_id", current_user.id
+      - else
+        = hidden_field_tag "parent_id", current_user.parent_id
 
   / Footer
   %footer.footer
