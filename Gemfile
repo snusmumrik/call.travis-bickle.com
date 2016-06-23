@@ -46,7 +46,7 @@ group :development do
   gem 'spring'
 end
 
-gem 'bootstrap3-datetimepicker-rails'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.0.0'
 gem 'cancancan'
 gem 'devise'
 gem 'devise-i18n'
@@ -58,7 +58,7 @@ gem 'haml-rails'
 # gem 'houston'
 gem 'i18n_generators'
 gem 'kaminari'
-gem 'momentjs-rails'
+gem 'momentjs-rails', '>= 2.9.0'
 gem 'paranoia'
 gem 'paperclip'
 gem 'websocket-rails'

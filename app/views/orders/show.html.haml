@@ -39,14 +39,15 @@
               %td#assigned_at= @order.assigned_at.strftime("%m月%d日 %H:%M") rescue nil
             - else
               %td#assigned_at.big= @order.assigned_at.strftime("%H:%M") rescue nil
-          - if current_user.admin?
-            %tr
-              %th= t("activerecord.attributes.order.picked_up_at")
-              %td#assigned_at= @order.picked_up_at.strftime("%m月%d日 %H:%M") rescue nil
-            %tr
-              %th= t("activerecord.attributes.order.arrived_at")
-              %td#assigned_at= @order.arrived_at.strftime("%m月%d日 %H:%M") rescue nil
-        = hidden_field_tag "order_device_token", @order.device_token
+          -# - if current_user.admin?
+          -#   %tr
+          -#     %th= t("activerecord.attributes.order.picked_up_at")
+          -#     %td#assigned_at= @order.picked_up_at.strftime("%m月%d日 %H:%M") rescue nil
+          -#   %tr
+          -#     %th= t("activerecord.attributes.order.arrived_at")
+          -#     %td#assigned_at= @order.arrived_at.strftime("%m月%d日 %H:%M") rescue nil
+        - if user_signed_in? && current_user.admin.nil?
+          = hidden_field_tag "device_token", @order.device_token
 .container
   .row
     - unless current_user.admin?
@@ -58,7 +59,7 @@
           - if current_user.admin?
             = link_to t("links.back"), orders_path, class: "btn btn-default"
           - else
-            = link_to t("links.back"), new_order_path, class: "btn btn-default"
+            %div{data: "no-turbolink"}= link_to t("links.back"), new_order_path, class: "btn btn-default"
         / Map
         %section#contact.map
           -# %iframe{:frameborder => "0", :height => "100%", :marginheight => "0", :marginwidth => "0", :scrolling => "no", :width => "100%", :src => "https://maps.google.com/maps?hl=ja&ie=UTF8&q=#{@order.address}&output=embed"}
