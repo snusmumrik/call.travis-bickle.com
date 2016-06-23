@@ -48,11 +48,11 @@ class @ChatClass
   confirmMessage: (message) =>
     console.log message
     $('#sound-file2').get(0).play()
-    $('#taxi').html(message['taxi'])
-    $('#assigned_at').html(message['assigned_at'])
+    $('#taxi').hide().html(message['taxi']).fadeIn('slow')
+    $('#assigned_at').hide().html(message['assigned_at']).fadeIn('slow')
     $('div.alert').hide('slow')
-    $('#title').html('配車が確定しました。')
-    $('#sub-title').html('車両到着時に合言葉の確認をお願いいたします。')
+    $('#title').hide().html('配車が確定しました。').fadeIn('slow')
+    $('#sub-title').hide().html('車両到着時に合言葉の確認をお願いいたします。').fadeIn('slow')
     $('#loading').hide('slow')
     $('#order_back a').removeClass('disabled')
 

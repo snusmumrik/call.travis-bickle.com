@@ -44,7 +44,7 @@
     -#           %li= link_to t("links.user.sign_up"), new_user_registration_path
 
     / Navigation
-    - if user_signed_in? && current_user.admin?
+    - if (user_signed_in? && current_user.admin?) || user_signed_in? && controller.controller_name == "contents"
       %a#menu-toggle.btn.btn-dark.btn-lg.toggle{href: "#"}
         %i.fa.fa-bars
       %nav#sidebar-wrapper
