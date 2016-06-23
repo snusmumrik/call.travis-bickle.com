@@ -6,7 +6,7 @@ class PersonInChargesController < ApplicationController
   # GET /person_in_charges
   # GET /person_in_charges.json
   def index
-    @person_in_charges = PersonInCharge.page params[:page]
+    @person_in_charges = PersonInCharge.where(["user_id = ?" ,current_user.id]).page params[:page]
   end
 
   # GET /person_in_charges/1

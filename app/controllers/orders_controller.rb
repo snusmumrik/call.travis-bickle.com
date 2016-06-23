@@ -88,7 +88,7 @@ class OrdersController < ApplicationController
   end
 
   def set_taxi
-    @taxis = Taxi.all.inject(Array.new) {|a, t| a << [t.name, t.id]; a}
+    @taxis = Taxi.where(["user_id = ?", current_user.id]).all.inject(Array.new) {|a, t| a << [t.name, t.id]; a}
   end
 
   def set_amount

@@ -6,7 +6,7 @@ class TaxisController < ApplicationController
   # GET /taxis
   # GET /taxis.json
   def index
-    @taxis = Taxi.order("name").page params[:page]
+    @taxis = Taxi.where(["user_id =?", current_user.id]).order("name").page params[:page]
   end
 
   # GET /taxis/1
