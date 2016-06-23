@@ -16,9 +16,11 @@ class @ChatClass
   bindEvents: () =>
     $('#create').on 'click', @createMessage
     $('#update').on 'click', @updateMessage
+    $('#destroy').on 'click', @destroyMessage
     # サーバーから***_messageを受け取ったら***Messageを実行
     if @user_id == @parent_id
       @admin_channel.bind 'notify_message', @notifyMessage
+      @admin_channel.bind 'cancel_message', @cancelMessage
     else if @device_token != undefined
       @client_channel.bind 'confirm_message', @confirmMessage
 
@@ -31,7 +33,10 @@ class @ChatClass
     console.log message
     $('#sound-file2').get(0).play()
     $('.container').eq(0).prepend('<div class="alert alert-success"><p id="notice"></p></div>')
-    $('p#notice').hide().html("<a href src='/orders'>新しい配車依頼がありました。詳細はここをクリックして確認してください。</a>").fadeIn('slow')
+    $('p#notice').hide().html("<a href src='/orders'>新しい配車依頼がありました。詳細はここをクリックして確認してください。3秒後に自動的にページが更新されます。</a>").fadeIn('slow')
+    setTimeout (->
+      window.location.href = '/orders'
+    ), 3000
 
   updateMessage: (event) =>
     if $('#order_taxis_taxi_id').val() != '' && $('#order_assigned_at').val() != ''
@@ -50,6 +55,20 @@ class @ChatClass
     $('#sub-title').html('車両到着時に合言葉の確認をお願いいたします。')
     $('#loading').hide('slow')
     $('#order_back a').removeClass('disabled')
+
+  destroyMessage: (event) =>
+    $('#sound-file2').get(0).play()
+    # オブジェクトでデータを指定してサーバ側にsend_messageのイベントを送信
+    @dispatcher.trigger 'cancel_message', { parent_id: @parent_id }
+
+  cancelMessage: (message) =>
+    console.log message
+    $('#sound-file2').get(0).play()
+    $('.container').eq(0).prepend('<div class="alert alert-danger"><p id="alert"></p></div>')
+    $('p#alert').hide().html("<a href src='/orders'>配車依頼のキャンセルがありました。詳細はここをクリックして確認してください。3秒後に自動的にページが更新されます。</a>").fadeIn('slow')
+    setTimeout (->
+      window.location.href = '/orders'
+    ), 3000
 
 $ ->
   websocket_url = $('#websocket_url').val()

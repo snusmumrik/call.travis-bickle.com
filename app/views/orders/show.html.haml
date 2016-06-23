@@ -60,6 +60,7 @@
             = link_to t("links.edit"), edit_order_path(@order), class: "btn btn-lg btn-default"
           - else
             #order_back{data: "no-turbolink"}= link_to t("links.order.back"), new_order_path, class: "btn btn-default btn-lg disabled"
+        = link_to t("links.order.destroy"), @order, method: :delete, data: { confirm: t("messages.order.destroy") }, id: "destroy", class: "btn btn-danger btn-lg"
       / Map
       -# %section#contact.map
       -#   %iframe{:frameborder => "0", :height => "100%", :marginheight => "0", :marginwidth => "0", :scrolling => "no", :width => "100%", :src => "https://maps.google.com/maps?hl=ja&ie=UTF8&q=#{@order.address}&output=embed"}

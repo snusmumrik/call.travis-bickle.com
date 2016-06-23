@@ -15,4 +15,5 @@ WebsocketRails::EventMap.describe do
   subscribe :client_connected, to: ChatController, with_method: :connect_user
   subscribe :notify_message, to: ChatController, with_method: :notify_message
   subscribe :confirm_message, to: ChatController, with_method: :confirm_message
+  subscribe :cancel_message, to: ChatController, with_method: :cancel_message
 end

@@ -36,7 +36,7 @@ class Ability
       can :manage, Taxi, user: user
     elsif user
       can :create, Order
-      can :read, Order, user: user
+      can :manage, Order, user: user
     end
   end
 end

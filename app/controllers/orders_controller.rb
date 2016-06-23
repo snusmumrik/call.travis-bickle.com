@@ -10,7 +10,7 @@ class OrdersController < ApplicationController
   # GET /orders
   # GET /orders.json
   def index
-    @orders = Order.includes(:taxis).where(["parent_id = ?", current_user.id]).order("created_at DESC").page params[:page]
+    @orders = Order.includes(:taxis).where(["parent_id = ?", current_user.id]).order("created_at DESC").with_deleted.page params[:page]
   end
 
   # GET /orders/1
@@ -76,7 +76,7 @@ class OrdersController < ApplicationController
   def destroy
     @order.destroy
     respond_to do |format|
-      format.html { redirect_to orders_url, notice: t("activerecord.models.order") + t("messages.order.destroyed") }
+      format.html { redirect_to new_order_url, notice: t("activerecord.models.order") + t("messages.order.destroyed") }
       format.json { head :no_content }
     end
   end

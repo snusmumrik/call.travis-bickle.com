@@ -14,7 +14,8 @@ ja:
         amount: 台数
         arrived_at: 到着
         assigned_at: 到着予定
-        deleted_at: deleted_at  #g
+        created_at: 依頼時刻
+        deleted_at: キャンセル
         keyword: 合言葉
         latitude: 緯度
         longitude: 経度
@@ -95,6 +96,7 @@ ja:
     order:
       back: 配車依頼画面へ戻る
       new: タクシーを呼ぶ
+      destroy: キャンセル
 
     user:
       sign_in: ログイン
@@ -115,6 +117,8 @@ ja:
 
     order:
       created: 現在配車依頼を行っております。車両の手配が完了するまで、しばらくお待ちください。
+      destroy: 配車依頼をキャンセルしてもよろしいですか？
+      destroyed: 配車依頼をキャンセルしました。
 
     user:
       sign_out: ログアウトしてよろしいですか？

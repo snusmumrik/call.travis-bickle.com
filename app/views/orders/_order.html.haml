@@ -1,4 +1,4 @@
-%tr{class: order.assigned_at.blank? && "info"}
+%tr{class: order.assigned_at.blank? && "info" || order.deleted? && "danger"}
   %td= order.address
   %td= order.amount
   %td
@@ -8,7 +8,10 @@
   %td= order.assigned_at.strftime("%m月%d日 %H時%M分") if order.assigned_at
   -# %td= order.picked_up_at.strftime("%H時%M分") if order.picked_up_at
   -# %td= order.arrived_at.strftime("%H時%M分") if order.arrived_at
-  %td
-    = link_to t("links.show"), order, class: "btn btn-default btn-sm"
-    = link_to t("links.edit"), edit_order_path(order), class: "btn btn-default btn-sm"
-    = link_to t("links.destroy"), order, method: :delete, data: { confirm: t("messages.are_you_sure") }, class: "btn btn-default btn-sm"
+  %td.text-center
+    - if order.deleted?
+      = t("activerecord.attributes.order.deleted_at") if order.deleted?
+    - else
+      = link_to t("links.show"), order, class: "btn btn-default btn-sm"
+      = link_to t("links.edit"), edit_order_path(order), class: "btn btn-default btn-sm"
+      = link_to t("links.destroy"), order, method: :delete, data: { confirm: t("messages.are_you_sure") }, class: "btn btn-default btn-sm"
