@@ -5,3 +5,8 @@
         %h1.title= t("activerecord.models.order") + t("views.edit")
 
       = render 'form'
+
+    .col-lg-10.col-lg-offset-1.text-center
+      / Map
+      %section#contact.map
+        %iframe{:frameborder => "0", :height => "100%", :marginheight => "0", :marginwidth => "0", :scrolling => "no", :width => "100%", :src => "https://maps.google.com/maps?hl=ja&ie=UTF8&q=#{@order.address}&output=embed"}

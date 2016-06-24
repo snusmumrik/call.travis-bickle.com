@@ -7,12 +7,13 @@
           %li= msg
 
   .field
+    %p
+      = label_tag t("activerecord.models.location")
+      .big= @location.name
     = f.label :address
     = f.text_field :address, class: "form-control"
     = f.label :amount
     = f.text_field :amount, class: "form-control"
-    = f.label :time
-    = f.text_field :time, class: "form-control"
   -# .field
   -#   = f.label :latitude
   -#   = f.text_field :latitude, class: "form-control"
@@ -20,38 +21,36 @@
   -#   = f.label :longitude
   -#   = f.text_field :longitude, class: "form-control"
   .field
-    = f.label :keyword
-    = f.text_field :keyword, class: "form-control"
-  .field
     = f.label :taxi
     = f.fields_for :taxis do |taxi_form|
       - if @order.taxis.first
-        = taxi_form.select :taxi_id, options_for_select(@taxis, @order.taxis.first.id), {include_blank: true}, class: "form-control"
+        = taxi_form.select :taxi_id, options_for_select(@taxis, @order.taxis.first.id), {include_blank: true}, class: "form-control", tabindex: 1, autofocus: true
       - else
-        = taxi_form.select :taxi_id, options_for_select(@taxis), {include_blank: true}, class: "form-control"
-    = f.hidden_field :device_token
-    .field
+        = taxi_form.select :taxi_id, options_for_select(@taxis), {include_blank: true}, class: "form-control", tabindex: 1, autofocus: true
+  .field
+    = f.label :keyword
+    = f.text_field :keyword, class: "form-control"
+  .field
     = f.label :created_at
     = @order.created_at.try(:strftime, "%m月%d日 %H:%M")
-    .field
+  .field
+    = f.label :time
+    = f.text_field :time, class: "form-control"
+  .field
     = f.label :assigned_at
     - if @order.assigned_at.blank?
       （分後）
-    - if @order.assigned_at.blank?
-      = f.text_field :assigned_at, class: "form-control"
+      = f.text_field :assigned_at, class: "form-control", tabindex: 2
     - else
-      = f.text_field :assigned_at, class: "form-control datetimepicker", value: @order.assigned_at.try(:strftime, "%m月%d日 %H:%M")
+      = f.text_field :assigned_at, class: "form-control datetimepicker", value: @order.assigned_at.try(:strftime, "%m月%d日 %H:%M"), tabindex: 2
   -# .field
   -#   = f.label :picked_up_at
   -#   = f.text_field :picked_up_at, class: "form-control datetimepicker"
   -# .field
   -#   = f.label :arrived_at
   -#   = f.text_field :arrived_at, class: "form-control datetimepicker"
+  = f.hidden_field :device_token
+
   .actions.text-center
     = link_to t("links.back"), orders_path, class: "btn btn-lg btn-default"
-    = f.submit id: "update",  class: "btn btn-lg btn-default"
-
-  -# .field
-  -#   / Map
-  -#   %section#contact.map
-  -#     %iframe{:frameborder => "0", :height => "100%", :marginheight => "0", :marginwidth => "0", :scrolling => "no", :width => "100%", :src => "https://maps.google.com/maps?hl=ja&ie=UTF8&q=#{@order.address}&output=embed"}
+    = f.submit id: "update",  class: "btn btn-lg btn-primary"

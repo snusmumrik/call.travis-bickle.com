@@ -13,7 +13,7 @@
 }
 
 .actions {
-    margin-top: 50px;
+    margin: 30px auto 50px !important;
 }
 
 .alert {
@@ -29,4 +29,8 @@
 
 th,td {
     vertical-align: middle !important;
+}
+
+footer {
+    margin-top: 50px !important
 }

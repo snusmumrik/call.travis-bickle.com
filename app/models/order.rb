@@ -17,5 +17,6 @@ class Order < ActiveRecord::Base
 
   before_save do
     self.address.sub!(/日本, 〒[0-9-]+ /, "")
+    self.location = Location.near(self.address).first.try(:name)
   end
 end

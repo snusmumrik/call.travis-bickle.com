@@ -1,0 +1,21 @@
+.container
+  .row
+    .col-lg-10.col-lg-offset-1.text-center
+      %h2= t("activerecord.models.location") + t("views.index")
+
+%section
+  .container
+    = paginate @locations
+    - @locations.each do |location|
+      .row
+        .col-lg-12.text-center
+          %h2= location.name
+          = link_to t("links.show"), location, class: "btn btn-sm btn-info"
+          = link_to t("links.edit"), edit_location_path(location), class: "btn btn-sm btn-success"
+          = link_to t("links.destroy"), location, method: :delete, data: { confirm: t("messages.are_you_sure") }, class: "btn btn-sm btn-danger"
+      %hr.small
+    / /.row
+    = paginate @locations
+  / /.container
+
+.text-center= link_to t("activerecord.models.location") + t("links.new"), new_location_path, class: "btn btn-primary"

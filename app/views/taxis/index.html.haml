@@ -9,13 +9,16 @@
     - @taxis.each do |taxi|
       .row
         .col-lg-12.text-center
-          %h2= taxi.name
-          = link_to t("links.show"), taxi, class: "btn btn-default btn-sm"
-          = link_to t("links.edit"), edit_taxi_path(taxi), class: "btn btn-default btn-sm"
-          = link_to t("links.destroy"), taxi, method: :delete, data: { confirm: t("messages.are_you_sure") }, class: "btn btn-default btn-sm"
+          %h2
+            = taxi.name
+            = surround "（", "）" do
+              = taxi.type_name
+          = link_to t("links.show"), taxi, class: "btn btn-sm btn-info"
+          = link_to t("links.edit"), edit_taxi_path(taxi), class: "btn btn-sm btn-success"
+          = link_to t("links.destroy"), taxi, method: :delete, data: { confirm: t("messages.are_you_sure") }, class: "btn btn-sm btn-danger"
       %hr.small
     / /.row
     = paginate @taxis
   / /.container
 
-.text-center= link_to t("activerecord.models.taxi") + t("links.new"), new_taxi_path, class: "btn btn-default"
+.text-center= link_to t("activerecord.models.taxi") + t("links.new"), new_taxi_path, class: "btn btn-primary"

@@ -6,6 +6,7 @@ class OrdersController < ApplicationController
   before_action :set_taxi, only: [:new, :create, :edit, :update]
   before_action :set_amount, only: [:new, :create]
   before_action :set_websocket_url
+  before_action :set_location, only: [:show, :edit, :update]
 
   # GET /orders
   # GET /orders.json
@@ -25,12 +26,13 @@ class OrdersController < ApplicationController
 
   # GET /orders/1/edit
   def edit
+    @order.keyword = sprintf("%04d", Random.rand(1..9999)) if @order.keyword.blank?
   end
 
   # POST /orders
   # POST /orders.json
   def create
-    @order = Order.new(order_params.merge(parent_id: current_user.parent_id, user: current_user, keyword: sprintf("%04d", Random.rand(1..9999))))
+    @order = Order.new(order_params.merge(parent_id: current_user.parent_id, user: current_user))
 
     respond_to do |format|
       if @order.save
@@ -102,6 +104,10 @@ class OrdersController < ApplicationController
     @websocket_url = WEBSOCKET_URL
   end
 
+  def set_location
+    @location = Location.near(@order.address).first
+  end
+
   # def send_notification(order)
   #   # Environment variables are automatically read, or can be overridden by any specified options. You can also
   #   # conveniently use `Houston::Client.development` or `Houston::Client.production`.
@@ -128,6 +134,6 @@ class OrdersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def order_params
-    params.require(:order).permit(:parent_id, :address, :latitude, :longitude, :amount, :time, :keyword, :device_token, :assigned_at, :picked_up_at, :arrived_at)
+    params.require(:order).permit(:parent_id, :location, :address, :latitude, :longitude, :amount, :time, :keyword, :device_token, :assigned_at, :picked_up_at, :arrived_at)
   end
 end

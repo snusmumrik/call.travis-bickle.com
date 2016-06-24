@@ -1,30 +1,39 @@
 ja:
   activerecord:
     models:
+      location: 端末設置場所
       order: 配車依頼
       orders_person_in_charge: orders_person_in_charge  #g
       orders_taxi: orders_taxi  #g
       person_in_charge: 担当者
-      taxi: タクシー
+      taxi: 車輌
       user: "ユーザ"  #g
+      habtm_orders: HABTMの注文  #g
+      habtm_person_in_charges: "料金のHABTM人"  #g
+      habtm_taxis: HABTMタクシー  #g
 
     attributes:
+      location:
+        address: 住所
+        name: 名称
+
       order:
         address: 住所
         amount: 台数
         arrived_at: 到着
         assigned_at: 到着予定
-        created_at: 依頼時刻
+        created_at: 注文時刻
         deleted_at: キャンセル
         keyword: 合言葉
         latitude: 緯度
+        location: 設置場所
         longitude: 経度
         picked_up_at: 乗車
-        taxi: 車両
+        taxi: :activerecord.models.taxi  #g
         time: 時間指定
         device_token: "デバイストークン"  #g
         person_in_charges: "料金の人物"  #g
-        taxis: "タクシー"  #g
+        taxis: :activerecord.models.taxi  #g
         user: :activerecord.models.user  #g
 
       orders_person_in_charge:
@@ -46,7 +55,7 @@ ja:
       taxi:
         deleted_at: deleted_at  #g
         name: 車番
-        type_name: 型
+        type_name: 型式
         user: :activerecord.models.user  #g
         orders: "受注"  #g
 
@@ -69,18 +78,22 @@ ja:
         orders: "受注"  #g
         person_in_charges: "料金の人物"  #g
         taxis: "タクシー"  #g
+        admin: "管理者"  #g
 
       habtm_orders:
         left_side: :activerecord.models.left_side  #g
         order: :activerecord.models.order  #g
+        deleted_at: "で削除"  #g
 
       habtm_person_in_charges:
         left_side: :activerecord.models.left_side  #g
         person_in_charge: :activerecord.models.person_in_charge  #g
+        deleted_at: "で削除"  #g
 
       habtm_taxis:
         left_side: :activerecord.models.left_side  #g
         taxi: :activerecord.models.taxi  #g
+        deleted_at: "で削除"  #g
 
   links:
     index: 一覧
