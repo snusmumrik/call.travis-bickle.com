@@ -9,7 +9,7 @@ $ ->
       format: "HH:mm"
       sideBySide: true
 
-  if $('#taxi').text() == '' || $('#assigned_at').text() == ''
+  if $('#assigned_at').text() == ''
     $('#loading').removeClass('hidden')
   else
     $('#order_back a').removeClass('disabled')

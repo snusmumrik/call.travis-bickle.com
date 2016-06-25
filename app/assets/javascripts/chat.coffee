@@ -39,7 +39,7 @@ class @ChatClass
     ), 3000
 
   updateMessage: (event) =>
-    if $('#order_taxis_taxi_id').val() != '' && $('#order_assigned_at').val() != ''
+    if $('#order_assigned_at').val() != ''
       device_token = $('#order_device_token').val()
       taxi = $('#order_taxis_taxi_id option:selected').text()
       # keyword = $('#order_keyword').val()
