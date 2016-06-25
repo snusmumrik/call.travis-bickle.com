@@ -34,9 +34,11 @@ class Ability
       can :manage, Order, parent_id: user.id
       can :manage, PersonInCharge, user: user
       can :manage, Taxi, user: user
+      can :manage, Location, user: user
     elsif user
       can :create, Order
       can :manage, Order, user: user
+      can :read, Location, parent_id: user.parent_id
     end
   end
 end
