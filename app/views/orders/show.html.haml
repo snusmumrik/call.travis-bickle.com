@@ -5,8 +5,8 @@
         %h1.title 配車依頼情報
       - elsif !@order.taxis.blank? && !@order.assigned_at.blank?
         %h1#title.title 配車が確定しました。
-        .sub-title
-          #sub-title 車両到着時に合言葉の確認をお願いいたします。
+        -# .sub-title
+        -#   #sub-title 車両到着時に合言葉の確認をお願いいたします。
       - else
         %h1#title.title 配車のご依頼を承りました。
         .sub-title
