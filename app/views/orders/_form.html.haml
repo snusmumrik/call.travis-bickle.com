@@ -27,9 +27,9 @@
         = taxi_form.select :taxi_id, options_for_select(@taxis, @order.taxis.first.id), {include_blank: true}, class: "form-control", tabindex: 1, autofocus: true
       - else
         = taxi_form.select :taxi_id, options_for_select(@taxis), {include_blank: true}, class: "form-control", tabindex: 1, autofocus: true
-  .field
-    = f.label :keyword
-    = f.text_field :keyword, class: "form-control"
+  -# .field
+  -#   = f.label :keyword
+  -#   = f.text_field :keyword, class: "form-control"
   .field
     = f.label :created_at
     = @order.created_at.try(:strftime, "%m月%d日 %H:%M")

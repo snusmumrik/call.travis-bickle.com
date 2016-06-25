@@ -42,15 +42,16 @@ class @ChatClass
     if $('#order_taxis_taxi_id').val() != '' && $('#order_assigned_at').val() != ''
       device_token = $('#order_device_token').val()
       taxi = $('#order_taxis_taxi_id option:selected').text()
-      keyword = $('#order_keyword').val()
+      # keyword = $('#order_keyword').val()
       assigned_at = $('#order_assigned_at').val() + '分後'
-      @dispatcher.trigger 'confirm_message', { device_token: device_token, taxi: taxi, keyword: keyword, assigned_at: assigned_at }
+      # @dispatcher.trigger 'confirm_message', { device_token: device_token, taxi: taxi, keyword: keyword, assigned_at: assigned_at }
+      @dispatcher.trigger 'confirm_message', { device_token: device_token, taxi: taxi, assigned_at: assigned_at }
 
   confirmMessage: (message) =>
     console.log message
     $('#sound-file2').get(0).play()
     $('#taxi').hide().html(message['taxi']).fadeIn('slow')
-    $('#keyword').hide().html(message['keyword']).fadeIn('slow')
+    # $('#keyword').hide().html(message['keyword']).fadeIn('slow')
     $('#assigned_at').hide().html(message['assigned_at']).fadeIn('slow')
     $('div.alert').hide('slow')
     $('#title').hide().html('配車が確定しました。').fadeIn('slow')

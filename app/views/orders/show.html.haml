@@ -29,9 +29,9 @@
           %tr
             %th= t("activerecord.attributes.order.taxi")
             %td#taxi.big= @order.taxis.first.try(:name)
-          %tr
-            %th= t("activerecord.attributes.order.keyword")
-            %td#keyword.big= @order.keyword
+          -# %tr
+          -#   %th= t("activerecord.attributes.order.keyword")
+          -#   %td#keyword.big= @order.keyword
           %tr
             %th= t("activerecord.attributes.order.created_at")
             %td.big= @order.created_at.strftime("%m月%d日 %H時%M分") rescue nil
