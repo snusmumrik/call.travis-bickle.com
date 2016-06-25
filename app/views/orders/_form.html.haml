@@ -49,6 +49,10 @@
   -# .field
   -#   = f.label :arrived_at
   -#   = f.text_field :arrived_at, class: "form-control datetimepicker"
+  .field
+    = f.label :memo
+    = f.text_field :memo, class: "form-control", tabindex: 3
+
   = f.hidden_field :device_token
 
   .actions.text-center

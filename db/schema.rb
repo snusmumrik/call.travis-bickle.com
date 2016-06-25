@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160623090110) do
+ActiveRecord::Schema.define(version: 20160625070112) do
 
   create_table "locations", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20160623090110) do
     t.integer  "amount",       limit: 4
     t.datetime "time"
     t.string   "keyword",      limit: 255
+    t.string   "memo",         limit: 255
     t.string   "device_token", limit: 255
     t.datetime "assigned_at"
     t.datetime "picked_up_at"

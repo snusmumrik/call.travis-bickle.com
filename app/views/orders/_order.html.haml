@@ -4,6 +4,7 @@
   %td= "#{order.amount}台"
   %td= order.taxis.first.try(:name)
   -# %td= order.keyword
+  %td= order.memo
   %td= order.created_at.strftime("%m月%d日 %H時%M分")
   %td= order.time.strftime("%m月%d日 %H時%M分") rescue nil
   %td= order.assigned_at.strftime("%m月%d日 %H時%M分") if order.assigned_at

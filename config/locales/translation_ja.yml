@@ -28,6 +28,7 @@ ja:
         latitude: 緯度
         location: 設置場所
         longitude: 経度
+        memo: 備考
         picked_up_at: 乗車
         taxi: :activerecord.models.taxi  #g
         time: 時間指定
