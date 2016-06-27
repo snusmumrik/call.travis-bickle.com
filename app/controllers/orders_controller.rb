@@ -77,8 +77,13 @@ class OrdersController < ApplicationController
   # DELETE /orders/1.json
   def destroy
     @order.destroy
+    if current_user.admin?
+      redirect_path = orders_path
+    else
+      redirect_path = new_order_url
+    end
     respond_to do |format|
-      format.html { redirect_to new_order_url, notice: t("activerecord.models.order") + t("messages.order.destroyed") }
+      format.html { redirect_to redirect_path, notice: t("activerecord.models.order") + t("messages.order.destroyed") }
       format.json { head :no_content }
     end
   end
