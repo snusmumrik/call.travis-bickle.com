@@ -77,5 +77,5 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  WEBSOCKET_URL = "taxi-button.herokuapp.com/websocket"
+  WEBSOCKET_URL = "taxibutton.herokuapp.com/websocket"
 end
